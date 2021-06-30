@@ -53,9 +53,15 @@ struct ContentView: View {
                 Section(header: Text("Total amount for check")) {
                     Text("$\(totalAmountForCheck, specifier: "%.2f")")
                 }
+                .onTapGesture {
+                    hideKeyboard()
+                }
                 
                 Section(header: Text("Amount per person")) {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
+                }
+                .onTapGesture {
+                    hideKeyboard()
                 }
             }
             .navigationBarTitle("WeSplit")
@@ -69,3 +75,11 @@ struct ContentView_Previews: PreviewProvider {
             .previewDevice("iPhone 12")
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
