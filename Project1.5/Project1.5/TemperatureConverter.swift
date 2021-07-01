@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
+//  TemperatureConverter.swift
 //  Project1.5
 //
-//  Created by Storyboard on 7/1/21.
+//  Created by Ryan Token on 7/1/21.
 //
 
 import SwiftUI
