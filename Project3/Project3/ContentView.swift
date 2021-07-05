@@ -57,6 +57,8 @@ struct ContentView: View {
                         .foregroundColor(.red)
                     motto2
                         .foregroundColor(.blue)
+                    Text("Hiii there")
+                        .bigBlueTitle()
                 }
                 
                 VStack(spacing: 10) {

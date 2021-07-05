@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B18C4E212693C2E300058CCB /* BigBlueTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18C4E202693C2E300058CCB /* BigBlueTitle.swift */; };
 		F4185AA02690AFE3007B1836 /* Project3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185A9F2690AFE3007B1836 /* Project3App.swift */; };
 		F4185AA22690AFE3007B1836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185AA12690AFE3007B1836 /* ContentView.swift */; };
 		F4185AA42690AFE4007B1836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4185AA32690AFE4007B1836 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B18C4E202693C2E300058CCB /* BigBlueTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBlueTitle.swift; sourceTree = "<group>"; };
 		F4185A9C2690AFE3007B1836 /* Project3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4185A9F2690AFE3007B1836 /* Project3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project3App.swift; sourceTree = "<group>"; };
 		F4185AA12690AFE3007B1836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				F4185AA12690AFE3007B1836 /* ContentView.swift */,
 				F4185AB22690BD50007B1836 /* GridStack.swift */,
 				F4185AB02690BA30007B1836 /* CustomModifier.swift */,
+				B18C4E202693C2E300058CCB /* BigBlueTitle.swift */,
 				F4185AAE2690B8F0007B1836 /* CapsuleText.swift */,
 				F4185AA32690AFE4007B1836 /* Assets.xcassets */,
 				F4185AA82690AFE4007B1836 /* Info.plist */,
@@ -150,6 +153,7 @@
 				F4185AB32690BD50007B1836 /* GridStack.swift in Sources */,
 				F4185AA22690AFE3007B1836 /* ContentView.swift in Sources */,
 				F4185AB12690BA30007B1836 /* CustomModifier.swift in Sources */,
+				B18C4E212693C2E300058CCB /* BigBlueTitle.swift in Sources */,
 				F4185AA02690AFE3007B1836 /* Project3App.swift in Sources */,
 				F4185AAF2690B8F0007B1836 /* CapsuleText.swift in Sources */,
 			);
