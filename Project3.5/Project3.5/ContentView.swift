@@ -21,6 +21,7 @@ struct ContentView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.white, Color.blue]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 Spacer()
                 
@@ -51,22 +52,26 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Text("Make Your Move:")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                HStack {
-                    ForEach(options, id: \.self) { option in
-                        Button(action: {
-                            makeMove(guess: option)
-                            newQuestion()
-                        }, label: {
-                            Text("\(option)")
-                                .padding()
-                                .background(Color.white)
-                                .clipShape(Capsule())
-                                .shadow(radius: 25)
-                        })
+                VStack {
+                    Text("Make Your Move:")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                    HStack {
+                        ForEach(options, id: \.self) { option in
+                            Button(action: {
+                                makeMove(guess: option)
+                                newQuestion()
+                            }, label: {
+                                Text("\(option)")
+                                    .bold()
+                                    .padding()
+                                    .background(Color.white)
+                                    .clipShape(Capsule())
+                                    .shadow(radius: 25)
+                                    
+                            })
+                        }
                     }
                 }
                 
@@ -77,7 +82,7 @@ struct ContentView: View {
                 Alert(title: Text("Game Over"), message: Text("Final score: \(playerScore)"), dismissButton: .default(Text("Start Over")) {
                     newGame()
                 })
-        }
+            }
         }
     }
     
