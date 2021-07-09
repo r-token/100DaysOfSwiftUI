@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06DCC7772698906D00892E48 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 06DCC7762698906D00892E48 /* SleepCalculator.mlmodel */; };
 		B1D1DADB2697E635001BAF55 /* Project4App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D1DADA2697E635001BAF55 /* Project4App.swift */; };
 		B1D1DADD2697E635001BAF55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D1DADC2697E635001BAF55 /* ContentView.swift */; };
 		B1D1DADF2697E636001BAF55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1D1DADE2697E636001BAF55 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06DCC7762698906D00892E48 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = SleepCalculator.mlmodel; path = "../../../Create ML/SleepCalculator.mlmodel"; sourceTree = "<group>"; };
 		B1D1DAD72697E635001BAF55 /* Project4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D1DADA2697E635001BAF55 /* Project4App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project4App.swift; sourceTree = "<group>"; };
 		B1D1DADC2697E635001BAF55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				B1D1DADC2697E635001BAF55 /* ContentView.swift */,
 				B1D1DADE2697E636001BAF55 /* Assets.xcassets */,
 				B1D1DAE32697E636001BAF55 /* Info.plist */,
+				06DCC7762698906D00892E48 /* SleepCalculator.mlmodel */,
 				B1D1DAE02697E636001BAF55 /* Preview Content */,
 			);
 			path = Project4;
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1D1DADD2697E635001BAF55 /* ContentView.swift in Sources */,
+				06DCC7772698906D00892E48 /* SleepCalculator.mlmodel in Sources */,
 				B1D1DADB2697E635001BAF55 /* Project4App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
