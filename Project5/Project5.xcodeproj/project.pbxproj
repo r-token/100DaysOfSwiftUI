@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4185AB7269B8D6C007B1836 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4185AB6269B8D6C007B1836 /* start.txt */; };
 		F4B096D22699ECAE00006DAF /* Project5App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B096D12699ECAE00006DAF /* Project5App.swift */; };
 		F4B096D42699ECAE00006DAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B096D32699ECAE00006DAF /* ContentView.swift */; };
 		F4B096D62699ECAF00006DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B096D52699ECAF00006DAF /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4185AB6269B8D6C007B1836 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = start.txt; path = "../../../hacking-with-swift/SwiftUI/project5-files/start.txt"; sourceTree = "<group>"; };
 		F4B096CE2699ECAE00006DAF /* Project5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B096D12699ECAE00006DAF /* Project5App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project5App.swift; sourceTree = "<group>"; };
 		F4B096D32699ECAE00006DAF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				F4B096D12699ECAE00006DAF /* Project5App.swift */,
 				F4B096D32699ECAE00006DAF /* ContentView.swift */,
 				F4B096D52699ECAF00006DAF /* Assets.xcassets */,
+				F4185AB6269B8D6C007B1836 /* start.txt */,
 				F4B096DA2699ECAF00006DAF /* Info.plist */,
 				F4B096D72699ECAF00006DAF /* Preview Content */,
 			);
@@ -127,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4B096D92699ECAF00006DAF /* Preview Assets.xcassets in Resources */,
+				F4185AB7269B8D6C007B1836 /* start.txt in Resources */,
 				F4B096D62699ECAF00006DAF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
