@@ -7,10 +7,24 @@
 
 import SwiftUI
 
+class User: ObservableObject {
+    @Published var firstName = "Bilbo"
+    @Published var lastName = "Baggins"
+}
+
 struct ContentView: View {
+    @ObservedObject var user = User()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text("Your name is \(user.firstName) \(user.lastName)")
+            
+            TextField("First Name", text: $user.firstName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Last Name", text: $user.lastName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+        .padding()
     }
 }
 
