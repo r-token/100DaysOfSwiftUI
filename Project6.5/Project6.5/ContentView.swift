@@ -23,7 +23,7 @@ struct ContentView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
-    @State private var showSetupView = false
+    @State private var showSetupView = true
     
     let tableOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     let numQuestionOptions = ["5", "10", "20", "All"]
