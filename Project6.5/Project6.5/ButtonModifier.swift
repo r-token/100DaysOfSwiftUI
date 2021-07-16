@@ -19,7 +19,6 @@ struct ButtonModifier: ViewModifier {
 struct StartButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .frame(width: 200, height: 50)
             .background(Color.white)
             .foregroundColor(.purple)
             .font(.title2)

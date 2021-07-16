@@ -140,6 +140,7 @@ struct ContentView: View {
                                 showSetupView = false
                             }, label: {
                                 Text("Start!")
+                                    .frame(width: 200, height: 50)
                                     .startButtonStyle()
                             })
                         }
@@ -153,10 +154,19 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .font(.title)
                             
-                            TextField("Your answer...", text: $userAnswer, onCommit: checkAnswer)
+                            TextField("Your answer...", text: $userAnswer)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .padding()
                                 .keyboardType(.numberPad)
+                            
+                            Button(action: {
+                                checkAnswer()
+                                UIApplication.shared.endEditing() // Call to dismiss keyboard
+                            }, label: {
+                                Text("Submit")
+                                    .frame(width: 100, height: 35)
+                                    .startButtonStyle()
+                            })
                             
                             Spacer()
                             Spacer()
@@ -166,6 +176,7 @@ struct ContentView: View {
                                 showSetupView = true
                             }, label: {
                                 Text("Back to Options")
+                                    .frame(width: 200, height: 50)
                                     .startButtonStyle()
                             })
                         }
@@ -225,6 +236,13 @@ struct ContentView: View {
         
         progress += 1
         showingAnswerAlert = true
+    }
+}
+
+// extension for keyboard to dismiss
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
