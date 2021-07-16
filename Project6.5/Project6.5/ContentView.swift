@@ -11,7 +11,19 @@ struct ContentView: View {
     @State private var selectedTables = [1]
     @State private var numberOfQuestions = "5"
     
-    @State private var showSetupView = true
+    @State private var firstNumber = 0
+    @State private var secondNumber = 0
+    @State private var question = ""
+    @State private var correctAnswer = 0
+    @State private var userAnswer = ""
+    @State private var score = 0
+    @State private var progress = 1
+    
+    @State private var showingAnswerAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
+    @State private var showSetupView = false
     
     let tableOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     let numQuestionOptions = ["5", "10", "20", "All"]
@@ -121,21 +133,35 @@ struct ContentView: View {
                             
                             Spacer()
                             Spacer()
+                            Spacer()
                             
                             Button(action: {
+                                generateNewQuestion()
                                 showSetupView = false
                             }, label: {
                                 Text("Start!")
                                     .startButtonStyle()
                             })
-                            
-                            Spacer()
                         }
                         .padding()
                     }
                 } else { // show game view
                     Group {
-                        VStack {
+                        VStack(spacing: 25) {
+                            Spacer()
+                            Text(question)
+                                .foregroundColor(.white)
+                                .font(.title)
+                            
+                            TextField("Your answer...", text: $userAnswer, onCommit: checkAnswer)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                                .keyboardType(.numberPad)
+                            
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            
                             Button(action: {
                                 showSetupView = true
                             }, label: {
@@ -143,11 +169,62 @@ struct ContentView: View {
                                     .startButtonStyle()
                             })
                         }
+                        .padding()
                     }
                 }
 			}
+            .alert(isPresented: $showingAnswerAlert, content: {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: Alert.Button.default(
+                        Text("OK"), action: { generateNewQuestion() }
+                    )
+                )
+            })
+            
             .navigationBarTitle(Text("Edutainment"))
 		}
+    }
+    
+    func generateNewQuestion() {
+        userAnswer = ""
+        if progress <= Int(numberOfQuestions) ?? 5 {
+            print("Generating question...")
+            firstNumber = selectedTables.randomElement() ?? 0
+            secondNumber = Int.random(in: 1...12)
+            
+            correctAnswer = firstNumber * secondNumber
+            
+            question = "What is \(firstNumber) x \(secondNumber)?"
+        } else {
+            showSetupView = true
+            progress = 1
+            score = 0
+        }
+    }
+    
+    func checkAnswer() {
+        print("Progress: \(progress)/\(Int(numberOfQuestions) ?? 0)")
+        if progress != Int(numberOfQuestions) {
+            if Int(userAnswer) == correctAnswer {
+                alertTitle = "Correct!"
+                alertMessage = "Way to go 👏"
+                score += 1
+            } else {
+                alertTitle = "Incorrect"
+                alertMessage = "Try again. The correct answer was \(correctAnswer) 😓"
+            }
+        } else {
+            // game is over
+            if Int(userAnswer) == correctAnswer {
+                alertTitle = "Correct! Game Over."
+            } else {
+                alertTitle = "Incorrect. Game Over."
+            }
+            
+            alertMessage = "You got \(score) out of \(numberOfQuestions) correct"
+        }
+        
+        progress += 1
+        showingAnswerAlert = true
     }
 }
 
