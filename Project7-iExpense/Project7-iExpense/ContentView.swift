@@ -23,18 +23,28 @@ struct ContentView: View {
                         }
                         
                         Spacer()
-                        Text("$\(item.amount)")
+                        if item.amount < 10 {
+                            Text("$\(item.amount)")
+                                .foregroundColor(.green)
+                        } else if item.amount < 100 {
+                            Text("$\(item.amount)")
+                                .foregroundColor(.orange)
+                        } else {
+                            Text("$\(item.amount)")
+                                .foregroundColor(.red)
+                        }
                     }
                 }
                 .onDelete(perform: removeItem)
             }
+            .toolbar { EditButton() }
             
             .sheet(isPresented: $isShowingAddExpenseView) {
                 AddView(expenses: expenses)
             }
             
             .navigationBarTitle(Text("iExpense"))
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
                 isShowingAddExpenseView.toggle()
             }, label: {
                 Image(systemName: "plus")

@@ -12,6 +12,10 @@ struct AddView: View {
     @State private var expenseType = "Personal"
     @State private var expenseAmount = ""
     
+    @State private var isShowingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
     @ObservedObject var expenses: Expenses
     
     @Environment(\.presentationMode) var presentationMode
@@ -37,8 +41,11 @@ struct AddView: View {
             .navigationBarTitle(Text("Add Expense"))
             .navigationBarItems(trailing: Button("Save") {
                 addItem()
-                presentationMode.wrappedValue.dismiss()
             })
+        }
+        
+        .alert(isPresented: $isShowingAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
     
@@ -47,6 +54,11 @@ struct AddView: View {
             let newItem = ExpenseItem(name: expenseName, type: expenseType, amount: actualAmount)
             
             expenses.items.append(newItem)
+            presentationMode.wrappedValue.dismiss()
+        } else {
+            alertTitle = "Invalid expense amount ☹️"
+            alertMessage = "Enter a number for the expense amount."
+            isShowingAlert.toggle()
         }
     }
 }
