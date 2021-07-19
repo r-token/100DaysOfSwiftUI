@@ -11,6 +11,11 @@
 		F426E47F26A4ED260033E908 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F426E47E26A4ED260033E908 /* ContentView.swift */; };
 		F426E48126A4ED270033E908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F426E48026A4ED270033E908 /* Assets.xcassets */; };
 		F426E48426A4ED270033E908 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F426E48326A4ED270033E908 /* Preview Assets.xcassets */; };
+		F426E48C26A5B4E20033E908 /* astronauts.json in Resources */ = {isa = PBXBuildFile; fileRef = F426E48B26A5B4E20033E908 /* astronauts.json */; };
+		F426E48E26A5B4E90033E908 /* missions.json in Resources */ = {isa = PBXBuildFile; fileRef = F426E48D26A5B4E90033E908 /* missions.json */; };
+		F426E49026A5B5710033E908 /* Astronaut.swift in Sources */ = {isa = PBXBuildFile; fileRef = F426E48F26A5B5710033E908 /* Astronaut.swift */; };
+		F426E49226A5B5C00033E908 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F426E49126A5B5C00033E908 /* Bundle-Decodable.swift */; };
+		F426E49426A5B7810033E908 /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F426E49326A5B7810033E908 /* Mission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +25,11 @@
 		F426E48026A4ED270033E908 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F426E48326A4ED270033E908 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F426E48526A4ED270033E908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F426E48B26A5B4E20033E908 /* astronauts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = astronauts.json; path = "../../../hacking-with-swift/SwiftUI/project8-files/astronauts.json"; sourceTree = "<group>"; };
+		F426E48D26A5B4E90033E908 /* missions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = missions.json; path = "../../../hacking-with-swift/SwiftUI/project8-files/missions.json"; sourceTree = "<group>"; };
+		F426E48F26A5B5710033E908 /* Astronaut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astronaut.swift; sourceTree = "<group>"; };
+		F426E49126A5B5C00033E908 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
+		F426E49326A5B7810033E908 /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +64,11 @@
 			children = (
 				F426E47C26A4ED260033E908 /* Project8_MoonshotApp.swift */,
 				F426E47E26A4ED260033E908 /* ContentView.swift */,
+				F426E48B26A5B4E20033E908 /* astronauts.json */,
+				F426E48F26A5B5710033E908 /* Astronaut.swift */,
+				F426E49126A5B5C00033E908 /* Bundle-Decodable.swift */,
+				F426E48D26A5B4E90033E908 /* missions.json */,
+				F426E49326A5B7810033E908 /* Mission.swift */,
 				F426E48026A4ED270033E908 /* Assets.xcassets */,
 				F426E48526A4ED270033E908 /* Info.plist */,
 				F426E48226A4ED270033E908 /* Preview Content */,
@@ -126,7 +141,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F426E48C26A5B4E20033E908 /* astronauts.json in Resources */,
 				F426E48426A4ED270033E908 /* Preview Assets.xcassets in Resources */,
+				F426E48E26A5B4E90033E908 /* missions.json in Resources */,
 				F426E48126A4ED270033E908 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +155,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F426E49026A5B5710033E908 /* Astronaut.swift in Sources */,
 				F426E47F26A4ED260033E908 /* ContentView.swift in Sources */,
 				F426E47D26A4ED260033E908 /* Project8_MoonshotApp.swift in Sources */,
+				F426E49426A5B7810033E908 /* Mission.swift in Sources */,
+				F426E49226A5B5C00033E908 /* Bundle-Decodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
