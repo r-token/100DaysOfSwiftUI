@@ -10,8 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @State private var petalOffset = -20.0
     @State private var petalWidth = 100.0
-    
+    @State private var cgAmount: CGFloat = 0.0
     @State private var colorCycle = 0.0
+    @State private var insetAmount: CGFloat = 50
+    @State private var rows = 4
+    @State private var columns = 4
+    
     var amount = 0.0
     var steps = 100
     
@@ -38,17 +42,79 @@ struct ContentView: View {
 //            Slider(value: $petalWidth, in: 0...100)
 //                .padding(.horizontal)
             
-            ZStack {
-                ForEach(0..<steps) { value in
-                    Circle()
-                        .inset(by: CGFloat(value))
-                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [
-                            self.color(for: value, brightness: 1),
-                            self.color(for: value, brightness: 0.5)
-                        ]), startPoint: .top, endPoint: .bottom), lineWidth: 2)
+//            ZStack {
+//                ForEach(0..<steps) { value in
+//                    Circle()
+//                        .inset(by: CGFloat(value))
+//                        .strokeBorder(LinearGradient(gradient: Gradient(colors: [
+//                            color(for: value, brightness: 1),
+//                            color(for: value, brightness: 0.5)
+//                        ]), startPoint: .top, endPoint: .bottom), lineWidth: 2)
+//                }
+//            }
+//            .drawingGroup()
+            
+//            ZStack {
+//                Image("PaulHudson")
+//                    .colorMultiply(.red)
+//
+////                Rectangle()
+////                    .fill(Color.red)
+////                    .blendMode(.multiply)
+//            }
+//            .frame(width: 400, height: 500)
+//            .clipped()
+            
+//            VStack {
+//                Image("PaulHudson")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 200, height: 200)
+//                    .saturation(Double(cgAmount))
+//                    .blur(radius: (1 - cgAmount) * 20)
+//
+//                ZStack {
+//                    Circle()
+//                        .fill(Color.red)
+//                        .frame(width: 200 * cgAmount)
+//                        .offset(x: -50, y: -80)
+//                        .blendMode(.screen)
+//
+//                    Circle()
+//                        .fill(Color.green)
+//                        .frame(width: 200 * cgAmount)
+//                        .offset(x: 50, y: -80)
+//                        .blendMode(.screen)
+//
+//                    Circle()
+//                        .fill(Color.blue)
+//                        .frame(width: 200 * cgAmount)
+//                        .blendMode(.screen)
+//                }
+//                .frame(width: 300, height: 300)
+//
+//                Slider(value: $cgAmount)
+//                    .padding()
+//            }
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//            .background(Color.black)
+//            .edgesIgnoringSafeArea(.all)
+            
+//            Trapezoid(insetAmount: insetAmount)
+//                .frame(width: 200, height: 100)
+//                .onTapGesture {
+//                    withAnimation {
+//                        insetAmount = CGFloat.random(in: 10...90)
+//                    }
+//                }
+            
+            Checkerboard(rows: rows, columns: columns)
+                .onTapGesture {
+                    withAnimation(.linear(duration: 3)) {
+                        self.rows = 8
+                        self.columns = 16
+                    }
                 }
-            }
-            .drawingGroup()
         }
     }
     
@@ -130,6 +196,67 @@ struct Flower: Shape {
         }
 
         // now send the main path back
+        return path
+    }
+}
+
+struct Trapezoid: Shape {
+    var insetAmount: CGFloat
+    
+    var animatableData: CGFloat {
+        get { insetAmount }
+        set { self.insetAmount = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        path.move(to: CGPoint(x: 0, y: rect.maxY))
+        path.addLine(to: CGPoint(x: insetAmount, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX - insetAmount, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: 0, y: rect.maxY))
+
+        return path
+   }
+}
+
+struct Checkerboard: Shape {
+    var rows: Int
+    var columns: Int
+    
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+           AnimatablePair(Double(rows), Double(columns))
+        }
+
+        set {
+            self.rows = Int(newValue.first)
+            self.columns = Int(newValue.second)
+        }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        // figure out how big each row/column needs to be
+        let rowSize = rect.height / CGFloat(rows)
+        let columnSize = rect.width / CGFloat(columns)
+
+        // loop over all rows and columns, making alternating squares colored
+        for row in 0..<rows {
+            for column in 0..<columns {
+                if (row + column).isMultiple(of: 2) {
+                    // this square should be colored; add a rectangle here
+                    let startX = columnSize * CGFloat(column)
+                    let startY = rowSize * CGFloat(row)
+
+                    let rect = CGRect(x: startX, y: startY, width: columnSize, height: rowSize)
+                    path.addRect(rect)
+                }
+            }
+        }
+
         return path
     }
 }
