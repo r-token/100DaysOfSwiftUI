@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var petalOffset = -20.0
     @State private var petalWidth = 100.0
     @State private var cgAmount: CGFloat = 0.0
+    @State private var arrowLineWidth: CGFloat = 10.0
     @State private var colorCycle = 0.0
     @State private var insetAmount: CGFloat = 50
     @State private var rows = 4
@@ -24,10 +25,32 @@ struct ContentView: View {
 //            Triangle()
 //                .stroke(Color.red, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
 //                .frame(width: 300, height: 300)
-//
+
 //            Arc(startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: true)
 //                .strokeBorder(Color.blue, lineWidth: 40)
-//
+            
+            // ARROW (challenge day)
+            Triangle()
+                .stroke(Color.red, style: StrokeStyle(lineWidth: arrowLineWidth, lineCap: .round, lineJoin: .round))
+                .frame(width: 75, height: 50)
+                .onTapGesture {
+                    withAnimation {
+                        arrowLineWidth += 10
+                    }
+                }
+            
+            Rectangle()
+                .stroke(Color.red, style: StrokeStyle(lineWidth: arrowLineWidth, lineCap: .round, lineJoin: .round))
+                .frame(width: 30, height: 300)
+                .onTapGesture {
+                    withAnimation {
+                        arrowLineWidth += 10
+                    }
+                }
+            
+            Slider(value: $arrowLineWidth, in: 1...50)
+                .padding()
+
 //            Circle()
 //                .strokeBorder(Color.blue, lineWidth: 40)
             
@@ -108,13 +131,13 @@ struct ContentView: View {
 //                    }
 //                }
             
-            Checkerboard(rows: rows, columns: columns)
-                .onTapGesture {
-                    withAnimation(.linear(duration: 3)) {
-                        self.rows = 8
-                        self.columns = 16
-                    }
-                }
+//            Checkerboard(rows: rows, columns: columns)
+//                .onTapGesture {
+//                    withAnimation(.linear(duration: 3)) {
+//                        self.rows = 8
+//                        self.columns = 16
+//                    }
+//                }
         }
     }
     
