@@ -8,28 +8,38 @@
 import SwiftUI
 
 struct HabitView: View {
-    @ObservedObject var habits: Habits
-    
-    @State var habit: IndividualHabit
+    var habitIndex: Int
+    @EnvironmentObject var habits: Habits
     
     var body: some View {
         VStack {
-            Text(habit.name)
+            Text(habits.habitList[habitIndex].name)
+                .font(.largeTitle)
                 .padding()
             
-            Text(habit.description)
+            Text(habits.habitList[habitIndex].description)
+                .font(.headline)
                 .padding()
             
-            HStack {
-                Text("\(habit.timesCompleted)")
-                Stepper("Times Completed", onIncrement: habit.incrementTimesCompleted, onDecrement: habit.decrementTimesCompleted)
+            Form {
+                Stepper("Completed \(habits.habitList[habitIndex].timesCompleted) times", onIncrement: incrementTimesCompleted, onDecrement: decrementTimesCompleted)
             }
+            
+            Spacer()
         }
+    }
+    
+    func incrementTimesCompleted() {
+        habits.habitList[habitIndex].timesCompleted += 1
+    }
+    
+    func decrementTimesCompleted() {
+        habits.habitList[habitIndex].timesCompleted -= 1
     }
 }
 
-//struct HabitView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HabitView()
-//    }
-//}
+struct HabitView_Previews: PreviewProvider {
+    static var previews: some View {
+        HabitView(habitIndex: 0)
+    }
+}

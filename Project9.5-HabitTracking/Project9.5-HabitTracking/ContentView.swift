@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var habits = Habits()
-    
     @State private var isShowingNewHabitSheet = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(habits.habitList) { habit in
-                    NavigationLink(destination: HabitView(habits: habits, habit: habit)) {
-                        Text(habit.name)
+                ForEach(habits.habitList.indices, id: \.self) { index in
+                    NavigationLink(destination: HabitView(habitIndex: index).environmentObject(habits)) {
+                        Text(habits.habitList[index].name)
                     }
                 }
             }
