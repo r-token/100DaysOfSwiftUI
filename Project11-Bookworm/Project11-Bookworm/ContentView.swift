@@ -11,7 +11,9 @@ import CoreData
 struct ContentView: View {
 	@State private var rememberMe = false
 	
-    @Environment(\.managedObjectContext) private var viewContext
+    // @Environment(\.managedObjectContext) private var viewContext
+	
+	@Environment(\.horizontalSizeClass) var sizeClass
 
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -19,9 +21,18 @@ struct ContentView: View {
     // private var items: FetchedResults<Item>
 
     var body: some View {
-		VStack {
-			PushButton(title: "Remember Me", isOn: $rememberMe)
-			Text(rememberMe ? "On" : "Off")
+		if sizeClass == .compact {
+			return AnyView(VStack {
+				Text("Active size class:")
+				Text("COMPACT")
+			}
+			.font(.largeTitle))
+		} else {
+			return AnyView(HStack {
+				Text("Active size class:")
+				Text("REGULAR")
+			}
+			.font(.largeTitle))
 		}
 //        List {
 //            ForEach(items) { item in
