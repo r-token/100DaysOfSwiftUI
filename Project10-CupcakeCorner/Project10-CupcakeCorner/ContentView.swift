@@ -8,41 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var order = Order()
+    @ObservedObject var orderClass = OrderClass()
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Picker("Select your cake type", selection: $order.type) {
-                        ForEach(0..<Order.types.count) {
-                            Text(Order.types[$0])
+                    Picker("Select your cake type", selection: $orderClass.order.type) {
+                        ForEach(0..<OrderClass.types.count) {
+                            Text(OrderClass.types[$0])
                         }
                     }
                     
-                    Stepper(value: $order.quantity, in: 3...20) {
-                        Text("Number of cakes: \(order.quantity)")
+                    Stepper(value: $orderClass.order.quantity, in: 3...20) {
+                        Text("Number of cakes: \(orderClass.order.quantity)")
                     }
                 }
                 
                 Section {
-                    Toggle(isOn: $order.specialRequestEnabled.animation()) {
+                    Toggle(isOn: $orderClass.order.specialRequestEnabled.animation()) {
                         Text("Any special requests?")
                     }
                     
-                    if order.specialRequestEnabled {
-                        Toggle(isOn: $order.extraFrosting) {
+                    if orderClass.order.specialRequestEnabled {
+                        Toggle(isOn: $orderClass.order.extraFrosting) {
                             Text("Add extra frosting")
                         }
                         
-                        Toggle(isOn: $order.addSprinkles) {
+                        Toggle(isOn: $orderClass.order.addSprinkles) {
                             Text("Add extra sprinkles")
                         }
                     }
                 }
                 
                 Section {
-                    NavigationLink(destination: AddressView(order: order)) {
+                    NavigationLink(destination: AddressView(orderClass: orderClass)) {
                         Text("Delivery details")
                     }
                 }

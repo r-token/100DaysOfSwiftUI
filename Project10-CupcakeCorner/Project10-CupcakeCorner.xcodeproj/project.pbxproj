@@ -14,6 +14,7 @@
 		F442D0BC26B43A6100706495 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = F442D0BB26B43A6100706495 /* Order.swift */; };
 		F442D0BE26B43E3100706495 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F442D0BD26B43E3100706495 /* AddressView.swift */; };
 		F442D0C026B43F4D00706495 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F442D0BF26B43F4D00706495 /* CheckoutView.swift */; };
+		F4C5A76D26B5B78E00662DDC /* OrderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5A76C26B5B78E00662DDC /* OrderClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F442D0BB26B43A6100706495 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		F442D0BD26B43E3100706495 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		F442D0BF26B43F4D00706495 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		F4C5A76C26B5B78E00662DDC /* OrderClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				F442D0AE26B39C3700706495 /* ContentView.swift */,
 				F442D0BF26B43F4D00706495 /* CheckoutView.swift */,
 				F442D0BB26B43A6100706495 /* Order.swift */,
+				F4C5A76C26B5B78E00662DDC /* OrderClass.swift */,
 				F442D0BD26B43E3100706495 /* AddressView.swift */,
 				F442D0B026B39C3800706495 /* Assets.xcassets */,
 				F442D0B526B39C3800706495 /* Info.plist */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F442D0BC26B43A6100706495 /* Order.swift in Sources */,
+				F4C5A76D26B5B78E00662DDC /* OrderClass.swift in Sources */,
 				F442D0BE26B43E3100706495 /* AddressView.swift in Sources */,
 				F442D0C026B43F4D00706495 /* CheckoutView.swift in Sources */,
 				F442D0AF26B39C3700706495 /* ContentView.swift in Sources */,

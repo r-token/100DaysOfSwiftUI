@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CheckoutView: View {
-    @ObservedObject var order: Order
+    @ObservedObject var orderClass: OrderClass
+    @State private var confirmationTitle = ""
     @State private var confirmationMessage = ""
     @State private var isShowingConfirmation = false
     
@@ -20,8 +21,25 @@ struct CheckoutView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: geo.size.width)
-
-                    Text("Your total is $\(self.order.cost, specifier: "%.2f")")
+                    
+                    Text("Order Summary:")
+                        .font(.headline)
+                    
+                    VStack(spacing: 5) {
+                        Text("\(orderClass.order.quantity) \(OrderClass.types[orderClass.order.type]) cupcakes")
+                        
+                        if orderClass.order.specialRequestEnabled {
+                            if orderClass.order.extraFrosting {
+                                Text("* Extra Frosting")
+                            }
+                            if orderClass.order.addSprinkles {
+                                Text("* Extra Sprinkles")
+                            }
+                        }
+                    }
+                    .padding()
+                    
+                    Text("Your total is $\(orderClass.order.cost, specifier: "%.2f")")
                         .font(.title)
 
                     Button("Place Order") {
@@ -32,7 +50,7 @@ struct CheckoutView: View {
             }
         }
         .alert(isPresented: $isShowingConfirmation) {
-            Alert(title: Text("Thank you!"), message: Text(confirmationMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text(confirmationTitle), message: Text(confirmationMessage), dismissButton: .default(Text("OK")))
         }
         
         .navigationBarTitle("Check out", displayMode: .inline)
@@ -40,7 +58,7 @@ struct CheckoutView: View {
     
     func placeOrder() {
         // 1. Convert our current order object into some JSON data that can be sent
-        guard let encodedOrder = try? JSONEncoder().encode(order) else {
+        guard let encodedOrder = try? JSONEncoder().encode(orderClass.order) else {
             print("Failed to encode order")
             return
         }
@@ -54,16 +72,20 @@ struct CheckoutView: View {
         
         // 3. Run that request and process the response
         URLSession.shared.dataTask(with: request) { data, response, error in
+            // we'll get `data` (if successful) OR `error` (if unsuccessful) back, but not both
+            
             guard let data = data else {
-                print("No data in response: \(error?.localizedDescription ?? "Unknown error").")
+                confirmationTitle = "Unable to place order 😓"
+                confirmationMessage = "\(error?.localizedDescription ?? "Unknown error")"
+                isShowingConfirmation = true
                 return
             }
             
             if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
-                confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+                confirmationTitle = "Thank you!"
+                confirmationMessage = "Your order for \(decodedOrder.quantity) \(OrderClass.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
                 isShowingConfirmation = true
             } else {
-                confirmationMessage = "Error placing order! Err: \(error?.localizedDescription ?? "Unknown error")"
                 print("Invalid response from server")
             }
         }.resume()
@@ -72,6 +94,6 @@ struct CheckoutView: View {
 
 struct CheckoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckoutView(order: Order())
+        CheckoutView(orderClass: OrderClass())
     }
 }
