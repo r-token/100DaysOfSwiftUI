@@ -11,61 +11,46 @@ import CoreData
 struct ContentView: View {
 	@State private var rememberMe = false
 	
-    // @Environment(\.managedObjectContext) private var viewContext
-	
+    @Environment(\.managedObjectContext) var moc
 	@Environment(\.horizontalSizeClass) var sizeClass
 
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-//        animation: .default)
+	@FetchRequest(entity: Student.entity(), sortDescriptors: []) var students: FetchedResults<Student>
     // private var items: FetchedResults<Item>
 
     var body: some View {
-		if sizeClass == .compact {
-			return AnyView(VStack {
-				Text("Active size class:")
-				Text("COMPACT")
+		VStack {
+			List {
+				ForEach(students, id: \.id) { student in
+					Text(student.name ?? "Unknown")
+				}
 			}
-			.font(.largeTitle))
-		} else {
-			return AnyView(HStack {
-				Text("Active size class:")
-				Text("REGULAR")
+			
+			Button("Add Student") {
+				addStudent()
 			}
-			.font(.largeTitle))
 		}
-//        List {
-//            ForEach(items) { item in
-//                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-//            }
-//            .onDelete(perform: deleteItems)
-//        }
-//        .toolbar {
-//            #if os(iOS)
-//            EditButton()
-//            #endif
-//
-//            Button(action: addItem) {
-//                Label("Add Item", systemImage: "plus")
-//            }
-//        }
     }
 
-//    private func addItem() {
-//        withAnimation {
-//            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
-//
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
+    private func addStudent() {
+		let firstNames = ["Ginny", "Harry", "Hermione", "Luna", "Ron"]
+		let lastNames = ["Granger", "Lovegood", "Potter", "Weasley"]
+
+		let chosenFirstName = firstNames.randomElement()!
+		let chosenLastName = lastNames.randomElement()!
+		
+        withAnimation {
+            let student = Student(context: moc)
+			student.id = UUID()
+			student.name = "\(chosenFirstName) \(chosenLastName)"
+
+            do {
+                try moc.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
 
 //    private func deleteItems(offsets: IndexSet) {
 //        withAnimation {
