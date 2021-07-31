@@ -43,7 +43,21 @@ struct CheckoutView: View {
                         .font(.title)
 
                     Button("Place Order") {
-                        placeOrder()
+                        if #available(iOS 15.0, *) {
+                            Task {
+                                do {
+                                    try await placeOrderAsync()
+                                } catch {
+                                    confirmationTitle = "Unable to place order"
+                                    confirmationMessage = error.localizedDescription
+                                    isShowingConfirmation = true
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        } else {
+                            // Fallback on earlier versions
+                            placeOrder()
+                        }
                     }
                     .padding()
                 }
@@ -56,11 +70,11 @@ struct CheckoutView: View {
         .navigationBarTitle("Check out", displayMode: .inline)
     }
     
-    func placeOrder() {
+    func prepareURL() -> URLRequest? {
         // 1. Convert our current order object into some JSON data that can be sent
         guard let encodedOrder = try? JSONEncoder().encode(orderClass.order) else {
             print("Failed to encode order")
-            return
+            return nil
         }
         
         // 2. Prepare a URLRequest to send our encoded data as JSON
@@ -70,17 +84,44 @@ struct CheckoutView: View {
         request.httpMethod = "POST"
         request.httpBody = encodedOrder
         
-        // 3. Run that request and process the response
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // we'll get `data` (if successful) OR `error` (if unsuccessful) back, but not both
-            
-            guard let data = data else {
-                confirmationTitle = "Unable to place order 😓"
-                confirmationMessage = "\(error?.localizedDescription ?? "Unknown error")"
-                isShowingConfirmation = true
-                return
-            }
-            
+        return request
+    }
+    
+    func placeOrder() {
+        print("Using normal placeOrder function.")
+        
+        if let request = prepareURL() {
+            // 3. Run that request and process the response
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                // we'll get `data` (if successful) OR `error` (if unsuccessful) back, but not both
+                
+                guard let data = data else {
+                    confirmationTitle = "Unable to place order 😓"
+                    confirmationMessage = "\(error?.localizedDescription ?? "Unknown error")"
+                    isShowingConfirmation = true
+                    return
+                }
+                
+                if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
+                    confirmationTitle = "Thank you!"
+                    confirmationMessage = "Your order for \(decodedOrder.quantity) \(OrderClass.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+                    isShowingConfirmation = true
+                } else {
+                    print("Invalid response from server")
+                }
+            }.resume()
+        } else {
+            print("Got a nil response when encoding the order from prepareURL()")
+        }
+    }
+    
+    @available(iOS 15.0, *)
+    func placeOrderAsync() async throws {
+        print("Using async placeOrder function!")
+        
+        if let request = prepareURL() {
+            // 3. Run that request and process the response using new ASYNC/AWAIT structure
+            let (data, _) = try await URLSession.shared.data(for: request)
             if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
                 confirmationTitle = "Thank you!"
                 confirmationMessage = "Your order for \(decodedOrder.quantity) \(OrderClass.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
@@ -88,7 +129,9 @@ struct CheckoutView: View {
             } else {
                 print("Invalid response from server")
             }
-        }.resume()
+        } else {
+            print("Got a nil response when encoding the order from prepareURL()")
+        }
     }
 }
 
