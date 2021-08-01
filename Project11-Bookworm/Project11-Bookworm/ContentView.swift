@@ -10,12 +10,42 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-
-//	@FetchRequest(entity: Student.entity(), sortDescriptors: []) var students: FetchedResults<Student>
-    // private var items: FetchedResults<Item>
+    @Environment(\.presentationMode) var presentationMode
+    @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
+    
+    @State private var isShowingAddBookSheet = false
 
     var body: some View {
-		Text("Hello, world.")
+        NavigationView {
+            List {
+                ForEach(books, id: \.self) { book in
+                    NavigationLink(destination: Text(book.title ?? "Unknown Title")) {
+                        EmojiRatingView(rating: book.rating)
+                            .font(.largeTitle)
+                        
+                        VStack(alignment: .leading) {
+                            Text(book.title ?? "Unknown Title")
+                                .font(.headline)
+                            Text(book.author ?? "Unknown Author")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+                
+            .sheet(isPresented: $isShowingAddBookSheet) {
+                AddBookView().environment(\.managedObjectContext, moc)
+            }
+        
+            .navigationBarTitle("Bookworm")
+        
+            .navigationBarItems(trailing: Button(action: {
+                isShowingAddBookSheet.toggle()
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "plus")
+            })
+        }
     }
 
 //    private func addStudent() {
