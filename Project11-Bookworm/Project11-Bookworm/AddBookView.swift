@@ -49,9 +49,8 @@ struct AddBookView: View {
                         }
                     }
                 }
-                
-                .navigationBarTitle("Add book")
             }
+			.navigationBarTitle("Add book")
         }
     }
 }
