@@ -11,7 +11,11 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
+	
+	@FetchRequest(entity: Book.entity(), sortDescriptors: [
+		NSSortDescriptor(keyPath: \Book.title, ascending: true),
+		NSSortDescriptor(keyPath: \Book.author, ascending: true)
+	]) var books: FetchedResults<Book>
     
     @State private var isShowingAddBookSheet = false
 
@@ -19,7 +23,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(books, id: \.self) { book in
-                    NavigationLink(destination: Text(book.title ?? "Unknown Title")) {
+                    NavigationLink(destination: DetailView(book: book)) {
                         EmojiRatingView(rating: book.rating)
                             .font(.largeTitle)
                         
@@ -31,6 +35,7 @@ struct ContentView: View {
                         }
                     }
                 }
+				.onDelete(perform: deleteBooks)
             }
                 
             .sheet(isPresented: $isShowingAddBookSheet) {
@@ -39,7 +44,7 @@ struct ContentView: View {
         
             .navigationBarTitle("Bookworm")
         
-            .navigationBarItems(trailing: Button(action: {
+			.navigationBarItems(leading: EditButton(), trailing: Button(action: {
                 isShowingAddBookSheet.toggle()
                 presentationMode.wrappedValue.dismiss()
             }) {
@@ -47,42 +52,19 @@ struct ContentView: View {
             })
         }
     }
-
-//    private func addStudent() {
-//		let firstNames = ["Ginny", "Harry", "Hermione", "Luna", "Ron"]
-//		let lastNames = ["Granger", "Lovegood", "Potter", "Weasley"]
-//
-//		let chosenFirstName = firstNames.randomElement()!
-//		let chosenLastName = lastNames.randomElement()!
-//
-//        withAnimation {
-//            let student = Student(context: moc)
-//			student.id = UUID()
-//			student.name = "\(chosenFirstName) \(chosenLastName)"
-//
-//            do {
-//                try moc.save()
-//            } catch {
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
-
-//    private func deleteItems(offsets: IndexSet) {
-//        withAnimation {
-//            offsets.map { items[$0] }.forEach(viewContext.delete)
-//
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
+	
+	func deleteBooks(at offsets: IndexSet) {
+		for offset in offsets {
+			// find this book in our fetch request'
+			let book = books[offset]
+			
+			// delete it from the context
+			moc.delete(book)
+		}
+		
+		// save the new context
+		try? moc.save()
+	}
 }
 
 private let itemFormatter: DateFormatter = {

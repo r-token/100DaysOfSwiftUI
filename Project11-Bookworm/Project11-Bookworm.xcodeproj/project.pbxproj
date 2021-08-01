@@ -16,6 +16,7 @@
 		F4CAA57726B5EF9A008C1D4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA57626B5EF9A008C1D4E /* Preview Assets.xcassets */; };
 		F4CAA57926B5EF9A008C1D4E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA57826B5EF9A008C1D4E /* Persistence.swift */; };
 		F4CAA57C26B5EF9A008C1D4E /* Project11_Bookworm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA57A26B5EF9A008C1D4E /* Project11_Bookworm.xcdatamodeld */; };
+		F4CAA58426B758AE008C1D4E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA58326B758AE008C1D4E /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F4CAA57826B5EF9A008C1D4E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		F4CAA57B26B5EF9A008C1D4E /* Project11_Bookworm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project11_Bookworm.xcdatamodel; sourceTree = "<group>"; };
 		F4CAA57D26B5EF9A008C1D4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4CAA58326B758AE008C1D4E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				F4CAA56F26B5EF99008C1D4E /* Project11_BookwormApp.swift */,
 				F4CAA57126B5EF99008C1D4E /* ContentView.swift */,
+				F4CAA58326B758AE008C1D4E /* DetailView.swift */,
 				F4CAA57326B5EF99008C1D4E /* Assets.xcassets */,
 				F4CAA57826B5EF9A008C1D4E /* Persistence.swift */,
 				F4CAA57D26B5EF9A008C1D4E /* Info.plist */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4CAA57926B5EF9A008C1D4E /* Persistence.swift in Sources */,
+				F4CAA58426B758AE008C1D4E /* DetailView.swift in Sources */,
 				F4CAA57226B5EF99008C1D4E /* ContentView.swift in Sources */,
 				F47DFAE226B6F5A400EA0C16 /* EmojiRatingView.swift in Sources */,
 				F4CAA57026B5EF99008C1D4E /* Project11_BookwormApp.swift in Sources */,
