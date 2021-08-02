@@ -36,6 +36,11 @@ struct DetailView: View {
 				Text(book.author ?? "Unknown author")
 					.font(.title)
 					.foregroundColor(.secondary)
+                
+                if book.date != nil {
+                    Text(getDate(date: book.date ?? nil))
+                        .padding()
+                }
 
 				Text(book.review ?? "No review")
 					.padding()
@@ -67,6 +72,18 @@ struct DetailView: View {
 		try? self.moc.save()
 		presentationMode.wrappedValue.dismiss()
 	}
+    
+    func getDate(date: Date?) -> String {
+        if date != nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .long
+            dateFormatter.timeStyle = .short
+            
+            return "Rated on \(dateFormatter.string(from: date ?? Date.init()))"
+        } else {
+            return ""
+        }
+    }
 }
 
 struct DetailView_Previews: PreviewProvider {

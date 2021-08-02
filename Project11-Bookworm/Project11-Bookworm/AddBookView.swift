@@ -11,6 +11,8 @@ struct AddBookView: View {
     @Environment(\.managedObjectContext) var moc
 	@Environment(\.presentationMode) var presentationMode
     
+    @State private var isShowingUnselectedGenreAlert = false
+    
     @State private var title = ""
     @State private var author = ""
     @State private var rating = 3
@@ -25,6 +27,7 @@ struct AddBookView: View {
                 Section {
                     TextField("Name of book", text: $title)
                     TextField("Author's name", text: $author)
+                        .autocapitalization(.words)
                     
                     Picker("Genre", selection: $genre) {
                         ForEach(genres, id: \.self) {
@@ -39,22 +42,35 @@ struct AddBookView: View {
                     
                     Section {
                         Button("Save") {
-                            let newBook = Book(context: moc)
-                            newBook.title = title
-                            newBook.author = author
-                            newBook.rating = Int16(rating)
-                            newBook.genre = genre
-                            newBook.review = review
-
-                            try? moc.save()
-							
-							presentationMode.wrappedValue.dismiss()
+                            if genre == "" {
+                                isShowingUnselectedGenreAlert = true
+                            } else {
+                                addBook()
+                            }
                         }
                     }
                 }
             }
+            .alert(isPresented: $isShowingUnselectedGenreAlert) {
+                Alert(title: Text("No Genre Selected"), message: Text("Please select a genre before saving"), dismissButton: .default(Text("OK")))
+            }
+            
 			.navigationBarTitle("Add book")
         }
+    }
+    
+    func addBook() {
+        let newBook = Book(context: moc)
+        newBook.title = title
+        newBook.author = author
+        newBook.rating = Int16(rating)
+        newBook.genre = genre
+        newBook.review = review
+        newBook.date = Date.init()
+        
+        try? moc.save()
+        
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
