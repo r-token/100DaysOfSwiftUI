@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Project11.5-CoreDataProject
+//  Project12-CoreDataProject
 //
 //  Created by Ryan Token on 8/3/21.
 //
@@ -32,7 +32,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Project11_5_CoreDataProject")
+        container = NSPersistentContainer(name: "Project12_CoreDataProject")
 		
 		// allow the MOC to handle same-data collisions by overwriting what's already there with the new version
 		// adding multiple 'Harry Potter's on the main screen now and then saving will only add ONE actual Harry Potter data instance to the MOC

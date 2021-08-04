@@ -1,6 +1,6 @@
 //
-//  Project11_5_CoreDataProjectApp.swift
-//  Project11.5-CoreDataProject
+//  Project12_CoreDataProjectApp.swift
+//  Project12-CoreDataProject
 //
 //  Created by Ryan Token on 8/3/21.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Project11_5_CoreDataProjectApp: App {
+struct Project12_CoreDataProjectApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

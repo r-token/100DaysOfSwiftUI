@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F4CAA59226BA1B91008C1D4E /* Project11_5_CoreDataProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59126BA1B91008C1D4E /* Project11_5_CoreDataProjectApp.swift */; };
+		F4CAA59226BA1B91008C1D4E /* Project12_CoreDataProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59126BA1B91008C1D4E /* Project12_CoreDataProjectApp.swift */; };
 		F4CAA59426BA1B91008C1D4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59326BA1B91008C1D4E /* ContentView.swift */; };
 		F4CAA59626BA1B93008C1D4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA59526BA1B93008C1D4E /* Assets.xcassets */; };
 		F4CAA59926BA1B93008C1D4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA59826BA1B93008C1D4E /* Preview Assets.xcassets */; };
 		F4CAA59B26BA1B93008C1D4E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59A26BA1B93008C1D4E /* Persistence.swift */; };
-		F4CAA59E26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59C26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodeld */; };
+		F4CAA59E26BA1B93008C1D4E /* Project12_CoreDataProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA59C26BA1B93008C1D4E /* Project12_CoreDataProject.xcdatamodeld */; };
 		F4CAA5A726BA1E7C008C1D4E /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA5A526BA1E7C008C1D4E /* Movie+CoreDataClass.swift */; };
 		F4CAA5A826BA1E7C008C1D4E /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA5A626BA1E7C008C1D4E /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4CAA58E26BA1B91008C1D4E /* Project11.5-CoreDataProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project11.5-CoreDataProject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4CAA59126BA1B91008C1D4E /* Project11_5_CoreDataProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project11_5_CoreDataProjectApp.swift; sourceTree = "<group>"; };
+		F4CAA58E26BA1B91008C1D4E /* Project12-CoreDataProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project12-CoreDataProject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4CAA59126BA1B91008C1D4E /* Project12_CoreDataProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project12_CoreDataProjectApp.swift; sourceTree = "<group>"; };
 		F4CAA59326BA1B91008C1D4E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F4CAA59526BA1B93008C1D4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4CAA59826BA1B93008C1D4E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		F4CAA58526BA1B91008C1D4E = {
 			isa = PBXGroup;
 			children = (
-				F4CAA59026BA1B91008C1D4E /* Project11.5-CoreDataProject */,
+				F4CAA59026BA1B91008C1D4E /* Project12-CoreDataProject */,
 				F4CAA58F26BA1B91008C1D4E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,25 +52,25 @@
 		F4CAA58F26BA1B91008C1D4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4CAA58E26BA1B91008C1D4E /* Project11.5-CoreDataProject.app */,
+				F4CAA58E26BA1B91008C1D4E /* Project12-CoreDataProject.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F4CAA59026BA1B91008C1D4E /* Project11.5-CoreDataProject */ = {
+		F4CAA59026BA1B91008C1D4E /* Project12-CoreDataProject */ = {
 			isa = PBXGroup;
 			children = (
 				F4CAA5A526BA1E7C008C1D4E /* Movie+CoreDataClass.swift */,
 				F4CAA5A626BA1E7C008C1D4E /* Movie+CoreDataProperties.swift */,
-				F4CAA59126BA1B91008C1D4E /* Project11_5_CoreDataProjectApp.swift */,
+				F4CAA59126BA1B91008C1D4E /* Project12_CoreDataProjectApp.swift */,
 				F4CAA59326BA1B91008C1D4E /* ContentView.swift */,
 				F4CAA59526BA1B93008C1D4E /* Assets.xcassets */,
 				F4CAA59A26BA1B93008C1D4E /* Persistence.swift */,
 				F4CAA59F26BA1B93008C1D4E /* Info.plist */,
-				F4CAA59C26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodeld */,
+				F4CAA59C26BA1B93008C1D4E /* Project12_CoreDataProject.xcdatamodeld */,
 				F4CAA59726BA1B93008C1D4E /* Preview Content */,
 			);
-			path = "Project11.5-CoreDataProject";
+			path = "Project12-CoreDataProject";
 			sourceTree = "<group>";
 		};
 		F4CAA59726BA1B93008C1D4E /* Preview Content */ = {
@@ -84,9 +84,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4CAA58D26BA1B91008C1D4E /* Project11.5-CoreDataProject */ = {
+		F4CAA58D26BA1B91008C1D4E /* Project12-CoreDataProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4CAA5A226BA1B93008C1D4E /* Build configuration list for PBXNativeTarget "Project11.5-CoreDataProject" */;
+			buildConfigurationList = F4CAA5A226BA1B93008C1D4E /* Build configuration list for PBXNativeTarget "Project12-CoreDataProject" */;
 			buildPhases = (
 				F4CAA58A26BA1B91008C1D4E /* Sources */,
 				F4CAA58B26BA1B91008C1D4E /* Frameworks */,
@@ -96,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = "Project11.5-CoreDataProject";
+			name = "Project12-CoreDataProject";
 			productName = "Project11.5-CoreDataProject";
-			productReference = F4CAA58E26BA1B91008C1D4E /* Project11.5-CoreDataProject.app */;
+			productReference = F4CAA58E26BA1B91008C1D4E /* Project12-CoreDataProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -115,7 +115,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F4CAA58926BA1B91008C1D4E /* Build configuration list for PBXProject "Project11.5-CoreDataProject" */;
+			buildConfigurationList = F4CAA58926BA1B91008C1D4E /* Build configuration list for PBXProject "Project12-CoreDataProject" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -128,7 +128,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4CAA58D26BA1B91008C1D4E /* Project11.5-CoreDataProject */,
+				F4CAA58D26BA1B91008C1D4E /* Project12-CoreDataProject */,
 			);
 		};
 /* End PBXProject section */
@@ -152,10 +152,10 @@
 			files = (
 				F4CAA59B26BA1B93008C1D4E /* Persistence.swift in Sources */,
 				F4CAA59426BA1B91008C1D4E /* ContentView.swift in Sources */,
-				F4CAA59E26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodeld in Sources */,
+				F4CAA59E26BA1B93008C1D4E /* Project12_CoreDataProject.xcdatamodeld in Sources */,
 				F4CAA5A726BA1E7C008C1D4E /* Movie+CoreDataClass.swift in Sources */,
 				F4CAA5A826BA1E7C008C1D4E /* Movie+CoreDataProperties.swift in Sources */,
-				F4CAA59226BA1B91008C1D4E /* Project11_5_CoreDataProjectApp.swift in Sources */,
+				F4CAA59226BA1B91008C1D4E /* Project12_CoreDataProjectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,16 +284,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Project11.5-CoreDataProject/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Project12-CoreDataProject/Preview Content\"";
 				DEVELOPMENT_TEAM = DJAHJZFYK7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Project11.5-CoreDataProject/Info.plist";
+				INFOPLIST_FILE = "Project12-CoreDataProject/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ryantoken.Project11-5-CoreDataProject";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryantoken.Project12-CoreDataProject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,16 +306,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Project11.5-CoreDataProject/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Project12-CoreDataProject/Preview Content\"";
 				DEVELOPMENT_TEAM = DJAHJZFYK7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Project11.5-CoreDataProject/Info.plist";
+				INFOPLIST_FILE = "Project12-CoreDataProject/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ryantoken.Project11-5-CoreDataProject";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryantoken.Project12-CoreDataProject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,7 +325,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4CAA58926BA1B91008C1D4E /* Build configuration list for PBXProject "Project11.5-CoreDataProject" */ = {
+		F4CAA58926BA1B91008C1D4E /* Build configuration list for PBXProject "Project12-CoreDataProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4CAA5A026BA1B93008C1D4E /* Debug */,
@@ -334,7 +334,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4CAA5A226BA1B93008C1D4E /* Build configuration list for PBXNativeTarget "Project11.5-CoreDataProject" */ = {
+		F4CAA5A226BA1B93008C1D4E /* Build configuration list for PBXNativeTarget "Project12-CoreDataProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4CAA5A326BA1B93008C1D4E /* Debug */,
@@ -346,13 +346,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F4CAA59C26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodeld */ = {
+		F4CAA59C26BA1B93008C1D4E /* Project12_CoreDataProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				F4CAA59D26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodel */,
 			);
 			currentVersion = F4CAA59D26BA1B93008C1D4E /* Project11_5_CoreDataProject.xcdatamodel */;
-			path = Project11_5_CoreDataProject.xcdatamodeld;
+			path = Project12_CoreDataProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
