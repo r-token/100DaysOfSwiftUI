@@ -14,8 +14,8 @@ struct FilteredList<T: NSManagedObject, Content: View>: View {
     // this is our content closure; we'll call this once for each item in the list
     let content: (T) -> Content
     
-    init(filterKey: String, filterValue: String, @ViewBuilder content: @escaping (T) -> Content) {
-        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K BEGINSWITH %@", filterKey, filterValue))
+    init(filterKey: String, filterValue: String, sortDescriptors: [NSSortDescriptor], predicate: String, @ViewBuilder content: @escaping (T) -> Content) {
+        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: NSPredicate(format: "%K \(predicate.uppercased())[c] %@", filterKey, filterValue))
         self.content = content
     }
 

@@ -11,10 +11,21 @@ struct DynamicFetchRequestView: View {
     @Environment(\.managedObjectContext) var moc
     @State private var lastNameFilter = "A"
     
+    enum Predicate: String {
+        case beginsWith
+        case contains
+        case endsWith
+        case like
+        case matches
+    }
+    
     var body: some View {
         VStack {
             // list of matching singers
-            FilteredList(filterKey: "lastName", filterValue: lastNameFilter) { (singer: Singer) in
+            FilteredList(filterKey: "lastName", filterValue: lastNameFilter, sortDescriptors: [
+                NSSortDescriptor(keyPath: \Singer.lastName, ascending: true),
+                NSSortDescriptor(keyPath: \Singer.firstName, ascending: true)
+            ], predicate: Predicate.beginsWith.rawValue) { (singer: Singer) in
                 Text("\(singer.wrappedFirstName) \(singer.wrappedLastName)")
             }
 
