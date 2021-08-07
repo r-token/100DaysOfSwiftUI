@@ -36,6 +36,7 @@ struct PersistenceController {
 		
 		// allow the MOC to handle same-data collisions by overwriting what's already there with the new version
 		// adding multiple 'Harry Potter's on the main screen now and then saving will only add ONE actual Harry Potter data instance to the MOC
+		// note that this requires you to add a constraint to the xcdatamodeld core data entity
 		container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 		
         if inMemory {
