@@ -1,6 +1,6 @@
 //
-//  Friend+CoreDataClass.swift
-//  Friend
+//  Tags+CoreDataClass.swift
+//  Tags
 //
 //  Created by Ryan Token on 8/8/21.
 //
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-@objc(Friend)
-public class Friend: NSManagedObject, Decodable {
+@objc(Tags)
+public class Tags: NSManagedObject, Decodable {
     enum CodingKeys: CodingKey {
-        case id, name
+        case name
     }
 
     required convenience public init(from decoder: Decoder) throws {
@@ -25,7 +25,6 @@ public class Friend: NSManagedObject, Decodable {
 
             let container = try decoder.container(keyedBy: CodingKeys.self)
         
-            self.id = try container.decode(String.self, forKey: .id)
             self.name = try container.decode(String.self, forKey: .name)
     }
 }

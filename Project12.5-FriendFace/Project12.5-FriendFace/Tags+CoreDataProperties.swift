@@ -1,6 +1,6 @@
 //
-//  Friend+CoreDataProperties.swift
-//  Friend
+//  Tags+CoreDataProperties.swift
+//  Tags
 //
 //  Created by Ryan Token on 8/8/21.
 //
@@ -10,22 +10,17 @@ import Foundation
 import CoreData
 
 
-extension Friend {
+extension Tags {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Friend> {
-        return NSFetchRequest<Friend>(entityName: "Friend")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Tags> {
+        return NSFetchRequest<Tags>(entityName: "Tags")
     }
 
-    @NSManaged public var id: String?
     @NSManaged public var name: String?
     @NSManaged public var user: NSSet?
 
-    public var wrappedId: String {
-        id ?? "Unknown ID"
-    }
-    
     public var wrappedName: String {
-        name ?? "Unknown name"
+        name ?? "Unknown tag name"
     }
     
     public var userArray: [User] {
@@ -37,7 +32,7 @@ extension Friend {
 }
 
 // MARK: Generated accessors for user
-extension Friend {
+extension Tags {
 
     @objc(addUserObject:)
     @NSManaged public func addToUser(_ value: User)
@@ -53,6 +48,6 @@ extension Friend {
 
 }
 
-extension Friend : Identifiable {
+extension Tags : Identifiable {
 
 }

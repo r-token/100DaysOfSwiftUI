@@ -25,9 +25,8 @@ extension User {
     @NSManaged public var isActive: Bool
     @NSManaged public var name: String?
     @NSManaged public var registered: String?
-    @NSManaged public var tags: String?
-    // need to figure out array of tags and friends here
-    @NSManaged public var friend: NSSet?
+    @NSManaged public var friends: NSSet?
+    @NSManaged public var tags: NSSet?
 
     public var wrappedAbout: String {
         about ?? "Unknown about"
@@ -57,37 +56,52 @@ extension User {
         registered ?? "Unknown registered"
     }
     
-    public var wrappedTags: String {
-        tags ?? "Unknown tags"
+    public var friendArray: [Friend] {
+        let set = friends as? Set<Friend> ?? []
+        return set.sorted {
+            $0.wrappedName < $1.wrappedName
+        }
     }
     
-    public var arrayTags: [String] {
-        get {
-            let data = Data(wrappedTags.utf8)
-            return (try? JSONDecoder().decode([String].self, from: data)) ?? []
-        }
-        set {
-            guard let data = try? JSONEncoder().encode(newValue),
-                  let string = String(data: data, encoding: .utf8) else { tags = ""; return }
-            tags = string
+    public var tagArray: [Tags] {
+        let set = tags as? Set<Tags> ?? []
+        return set.sorted {
+            $0.wrappedName < $1.wrappedName
         }
     }
 }
 
-// MARK: Generated accessors for friend
+// MARK: Generated accessors for friends
 extension User {
 
-    @objc(addFriendObject:)
-    @NSManaged public func addToFriend(_ value: Friend)
+    @objc(addFriendsObject:)
+    @NSManaged public func addToFriends(_ value: Friend)
 
-    @objc(removeFriendObject:)
-    @NSManaged public func removeFromFriend(_ value: Friend)
+    @objc(removeFriendsObject:)
+    @NSManaged public func removeFromFriends(_ value: Friend)
 
-    @objc(addFriend:)
-    @NSManaged public func addToFriend(_ values: NSSet)
+    @objc(addFriends:)
+    @NSManaged public func addToFriends(_ values: NSSet)
 
-    @objc(removeFriend:)
-    @NSManaged public func removeFromFriend(_ values: NSSet)
+    @objc(removeFriends:)
+    @NSManaged public func removeFromFriends(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for tags
+extension User {
+
+    @objc(addTagsObject:)
+    @NSManaged public func addToTags(_ value: Tags)
+
+    @objc(removeTagsObject:)
+    @NSManaged public func removeFromTags(_ value: Tags)
+
+    @objc(addTags:)
+    @NSManaged public func addToTags(_ values: NSSet)
+
+    @objc(removeTags:)
+    @NSManaged public func removeFromTags(_ values: NSSet)
 
 }
 

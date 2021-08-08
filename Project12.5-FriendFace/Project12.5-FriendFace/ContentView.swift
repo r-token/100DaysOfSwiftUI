@@ -81,7 +81,6 @@ struct ContentView: View {
                 newUser.address = user.wrappedAddress
                 newUser.about = user.wrappedAbout
                 newUser.registered = user.wrappedRegistered
-                newUser.tags = user.wrappedTags
             }
             
             do {

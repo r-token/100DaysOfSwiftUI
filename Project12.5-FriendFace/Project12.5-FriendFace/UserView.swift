@@ -56,12 +56,11 @@ struct UserView: View {
             }
             
             Section("Friends") {
-                Text("Need to implement friends relationship here someone")
-//                List(user.friends) { friend in
-//                    NavigationLink(destination: UserView(users: users, userID: friend.id)) {
-//                        Text(friend.name)
-//                    }
-//                }
+                List(user.friendArray, id: \.self) { friend in
+                    NavigationLink(destination: UserView(users: users, userID: friend.wrappedId)) {
+                        Text(friend.wrappedName)
+                    }
+                }
             }
             
             .navigationBarTitle(user.wrappedName)
@@ -75,13 +74,12 @@ func testUser() -> User {
     user.id = "ihfi8uy34t8uhe9p8t-asdfasdfwt34t-q34t5yhh"
     user.isActive = true
     user.name = "Ryan Token"
-    user.age = 27
-    user.company = "Storyboard Technology, Inc."
-    user.email = "ryantoken13@gmail.com"
-    user.address = "1920 S Florence Ave, Tulsa, OK, 74104"
-    user.about = "This dude is extremely cool"
+    user.age = 200
+    user.company = "Some company"
+    user.email = "someemail@gmail.com"
+    user.address = "Some address"
+    user.about = "This guy is extremely cool"
     user.registered = "2021-08-07T01:47:18-00:00"
-    user.tags = "test"
     
     return user
 }

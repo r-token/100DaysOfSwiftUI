@@ -2,12 +2,13 @@
 //  User+CoreDataClass.swift
 //  User
 //
-//  Created by Ryan Token on 8/7/21.
+//  Created by Ryan Token on 8/8/21.
 //
 //
 
 import Foundation
 import CoreData
+
 
 @objc(User)
 public class User: NSManagedObject, Decodable {
@@ -22,6 +23,7 @@ public class User: NSManagedObject, Decodable {
         case about
         case registered
         case tags
+        case friends
         // need to figure out array of tags and friends here
     }
 
@@ -43,7 +45,8 @@ public class User: NSManagedObject, Decodable {
         self.address = try container.decode(String.self, forKey: .address)
         self.about = try container.decode(String.self, forKey: .about)
         self.registered = try container.decode(String.self, forKey: .registered)
-        self.tags = try container.decode(String.self, forKey: .tags)
+        self.tags = try container.decode(Set<Tags>.self, forKey: .tags) as NSSet
+        self.friends = try container.decode(Set<Friend>.self, forKey: .friends) as NSSet
     }
 }
 
