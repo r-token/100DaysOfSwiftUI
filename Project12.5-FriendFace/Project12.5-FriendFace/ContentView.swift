@@ -58,10 +58,15 @@ struct ContentView: View {
         if let request = prepareURL() {
             let (data, _) = try await URLSession.shared.data(for: request)
             
-            if let decodedUsers = try? JSONDecoder().decode([User].self, from: data) {
+            let decoder = JSONDecoder()
+            decoder.userInfo[CodingUserInfoKey.managedObjectContext] = moc
+            
+            do {
+                let decodedUsers = try decoder.decode([User].self, from: data)
+                print(decodedUsers[0])
                 return decodedUsers
-            } else {
-                print("Could not decode data into [User]")
+            } catch {
+                print(String(describing: error))
             }
         }
         
