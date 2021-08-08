@@ -24,7 +24,6 @@ public class User: NSManagedObject, Decodable {
         case registered
         case tags
         case friends
-        // need to figure out array of tags and friends here
     }
 
     required convenience public init(from decoder: Decoder) throws {
@@ -45,7 +44,7 @@ public class User: NSManagedObject, Decodable {
         self.address = try container.decode(String.self, forKey: .address)
         self.about = try container.decode(String.self, forKey: .about)
         self.registered = try container.decode(String.self, forKey: .registered)
-        self.tags = try container.decode(Set<Tags>.self, forKey: .tags) as NSSet
+        self.tags = try container.decode([String].self, forKey: .tags)
         self.friends = try container.decode(Set<Friend>.self, forKey: .friends) as NSSet
     }
 }

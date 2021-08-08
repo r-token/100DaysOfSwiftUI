@@ -49,6 +49,18 @@ struct UserView: View {
                     Spacer()
                     Text(user.wrappedAddress)
                 }
+                HStack {
+                    Text("Tags:")
+                        .font(.headline)
+                    Spacer()
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack (spacing: 0) {
+                            ForEach(user.wrappedTags, id: \.self) { tag in
+                                Text("\(tag), ")
+                            }
+                        }
+                    }
+                }
             }
             
             Section("About") {
@@ -56,7 +68,7 @@ struct UserView: View {
             }
             
             Section("Friends") {
-                List(user.friendArray, id: \.self) { friend in
+                List(user.friendArray) { friend in
                     NavigationLink(destination: UserView(users: users, userID: friend.wrappedId)) {
                         Text(friend.wrappedName)
                     }
@@ -80,6 +92,7 @@ func testUser() -> User {
     user.address = "Some address"
     user.about = "This guy is extremely cool"
     user.registered = "2021-08-07T01:47:18-00:00"
+    user.tags = ["test", "another tag", "a third tag"]
     
     return user
 }

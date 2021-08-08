@@ -25,8 +25,8 @@ extension User {
     @NSManaged public var isActive: Bool
     @NSManaged public var name: String?
     @NSManaged public var registered: String?
+    @NSManaged public var tags: [String]?
     @NSManaged public var friends: NSSet?
-    @NSManaged public var tags: NSSet?
 
     public var wrappedAbout: String {
         about ?? "Unknown about"
@@ -56,18 +56,13 @@ extension User {
         registered ?? "Unknown registered"
     }
     
-    public var friendArray: [Friend] {
-        let set = friends as? Set<Friend> ?? []
-        return set.sorted {
-            $0.wrappedName < $1.wrappedName
-        }
+    public var wrappedTags: [String] {
+        tags ?? [""]
     }
     
-    public var tagArray: [Tags] {
-        let set = tags as? Set<Tags> ?? []
-        return set.sorted {
-            $0.wrappedName < $1.wrappedName
-        }
+    public var friendArray: [Friend] {
+        let set = friends as? Set<Friend> ?? []
+        return Array(set)
     }
 }
 
@@ -85,23 +80,6 @@ extension User {
 
     @objc(removeFriends:)
     @NSManaged public func removeFromFriends(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for tags
-extension User {
-
-    @objc(addTagsObject:)
-    @NSManaged public func addToTags(_ value: Tags)
-
-    @objc(removeTagsObject:)
-    @NSManaged public func removeFromTags(_ value: Tags)
-
-    @objc(addTags:)
-    @NSManaged public func addToTags(_ values: NSSet)
-
-    @objc(removeTags:)
-    @NSManaged public func removeFromTags(_ values: NSSet)
 
 }
 

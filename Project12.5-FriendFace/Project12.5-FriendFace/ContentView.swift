@@ -34,8 +34,11 @@ struct ContentView: View {
         .task {
             do {
                 if users.isEmpty {
+                    print("Users is empty, fetching the latest from the API")
                     let usersFromApi = try await getData()
                     saveData(users: usersFromApi)
+                } else {
+                    print("We already have data in Core Data, using that")
                 }
             } catch {
                 print(error.localizedDescription)
@@ -53,8 +56,6 @@ struct ContentView: View {
     }
     
     func getData() async throws -> [User]? {
-        print("Fetching data from API")
-        
         if let request = prepareURL() {
             let (data, _) = try await URLSession.shared.data(for: request)
             
@@ -63,7 +64,6 @@ struct ContentView: View {
             
             do {
                 let decodedUsers = try decoder.decode([User].self, from: data)
-                print(decodedUsers[0])
                 return decodedUsers
             } catch {
                 print(String(describing: error))
@@ -86,6 +86,7 @@ struct ContentView: View {
                 newUser.address = user.wrappedAddress
                 newUser.about = user.wrappedAbout
                 newUser.registered = user.wrappedRegistered
+                newUser.tags = user.wrappedTags
             }
             
             do {
