@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
-    @State private var users = [User]()
+    @Environment(\.managedObjectContext) private var moc
+    
+    @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
     
     var body: some View {
         NavigationView {
-            List(users) { user in
-                NavigationLink(destination: UserView(users: users, userID: user.id)) {
+            List(users, id: \.self) { (user: User) in
+                NavigationLink(destination: UserView(users: Array(users), userID: user.wrappedId)) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text(user.name)
+                        Text(user.wrappedName)
                             .font(.headline)
                         
-                        Text("\(user.email)")
+                        Text("\(user.wrappedEmail)")
                             .foregroundColor(.gray)
                     }
                     .padding(.vertical, 5)
@@ -30,7 +33,10 @@ struct ContentView: View {
         
         .task {
             do {
-                try await getData()
+                if users.isEmpty {
+                    let usersFromApi = try await getData()
+                    saveData(users: usersFromApi)
+                }
             } catch {
                 print(error.localizedDescription)
             }
@@ -46,16 +52,43 @@ struct ContentView: View {
         return request
     }
     
-    func getData() async throws {
+    func getData() async throws -> [User]? {
         print("Fetching data from API")
         
         if let request = prepareURL() {
             let (data, _) = try await URLSession.shared.data(for: request)
             
             if let decodedUsers = try? JSONDecoder().decode([User].self, from: data) {
-                users = decodedUsers
+                return decodedUsers
             } else {
                 print("Could not decode data into [User]")
+            }
+        }
+        
+        return nil
+    }
+    
+    func saveData(users: [User]?) {
+        if let users = users {
+            for user in users {
+                let newUser = User(context: moc)
+                newUser.id = user.wrappedId
+                newUser.isActive = user.isActive
+                newUser.name = user.wrappedName
+                newUser.age = user.age
+                newUser.company = user.wrappedCompany
+                newUser.email = user.wrappedEmail
+                newUser.address = user.wrappedAddress
+                newUser.about = user.wrappedAbout
+                newUser.registered = user.wrappedRegistered
+                newUser.tags = user.wrappedTags
+            }
+            
+            do {
+                try moc.save()
+                print("Saved users successfully")
+            } catch {
+                print("Error saving users: \(error)")
             }
         }
     }
