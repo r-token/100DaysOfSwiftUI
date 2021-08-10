@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F44A67A726C20D3F006638A3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44A67A626C20D3F006638A3 /* ImagePicker.swift */; };
 		F46172D726C0C80400036C5F /* Project13_InstafilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */; };
 		F46172D926C0C80400036C5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46172D826C0C80400036C5F /* ContentView.swift */; };
 		F46172DB26C0C80600036C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46172DA26C0C80600036C5F /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F44A67A626C20D3F006638A3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F46172D326C0C80400036C5F /* Project13-Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project13-Instafilter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project13_InstafilterApp.swift; sourceTree = "<group>"; };
 		F46172D826C0C80400036C5F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */,
 				F46172D826C0C80400036C5F /* ContentView.swift */,
+				F44A67A626C20D3F006638A3 /* ImagePicker.swift */,
 				F46172DA26C0C80600036C5F /* Assets.xcassets */,
 				F46172DF26C0C80600036C5F /* Info.plist */,
 				F46172DC26C0C80600036C5F /* Preview Content */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44A67A726C20D3F006638A3 /* ImagePicker.swift in Sources */,
 				F46172D926C0C80400036C5F /* ContentView.swift in Sources */,
 				F46172D726C0C80400036C5F /* Project13_InstafilterApp.swift in Sources */,
 			);
