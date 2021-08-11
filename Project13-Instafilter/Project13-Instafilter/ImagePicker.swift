@@ -2,34 +2,18 @@
 //  ImagePicker.swift
 //  Project13-Instafilter
 //
-//  Created by Ryan Token on 8/9/21.
+//  Created by Ryan Token on 8/11/21.
 //
 
-import Foundation
 import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
-    
     @Binding var image: UIImage?
     
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePicker
-        
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
@@ -41,5 +25,19 @@ struct ImagePicker: UIViewControllerRepresentable {
             
             parent.presentationMode.wrappedValue.dismiss()
         }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+        // coming back
     }
 }
