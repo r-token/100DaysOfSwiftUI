@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F430690B26C412160094FED0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430690A26C412160094FED0 /* ImagePicker.swift */; };
+		F45F5E1626C4A70E000F0C43 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F5E1526C4A70E000F0C43 /* ImageSaver.swift */; };
 		F46172D726C0C80400036C5F /* Project13_InstafilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */; };
 		F46172D926C0C80400036C5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46172D826C0C80400036C5F /* ContentView.swift */; };
 		F46172DB26C0C80600036C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46172DA26C0C80600036C5F /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		F430690A26C412160094FED0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F45F5E1526C4A70E000F0C43 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		F46172D326C0C80400036C5F /* Project13-Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project13-Instafilter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project13_InstafilterApp.swift; sourceTree = "<group>"; };
 		F46172D826C0C80400036C5F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				F46172D626C0C80400036C5F /* Project13_InstafilterApp.swift */,
 				F46172D826C0C80400036C5F /* ContentView.swift */,
+				F45F5E1526C4A70E000F0C43 /* ImageSaver.swift */,
 				F430690A26C412160094FED0 /* ImagePicker.swift */,
 				F46172DA26C0C80600036C5F /* Assets.xcassets */,
 				F46172DF26C0C80600036C5F /* Info.plist */,
@@ -144,6 +147,7 @@
 				F430690B26C412160094FED0 /* ImagePicker.swift in Sources */,
 				F46172D926C0C80400036C5F /* ContentView.swift in Sources */,
 				F46172D726C0C80400036C5F /* Project13_InstafilterApp.swift in Sources */,
+				F45F5E1626C4A70E000F0C43 /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
