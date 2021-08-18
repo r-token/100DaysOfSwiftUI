@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var centerCoordinate = CLLocationCoordinate2D()
     @State private var selectedPlace: MKPointAnnotation?
     @State private var showingPlaceDetails = false
+    @State private var showingEditScreen = false
     
     @State private var locations = [MKPointAnnotation]()
     
@@ -34,6 +35,8 @@ struct ContentView: View {
                         newLocation.coordinate = centerCoordinate
                         newLocation.title = "Example location"
                         locations.append(newLocation)
+                        selectedPlace = newLocation
+                        showingEditScreen = true
                     }) {
                         Image(systemName: "plus")
                     }
@@ -48,7 +51,15 @@ struct ContentView: View {
         }
         
         .alert(isPresented: $showingPlaceDetails) {
-            Alert(title: Text(selectedPlace?.title ?? "Unknown"), message: Text(selectedPlace?.subtitle ?? "Missing place information"), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Edit")))
+            Alert(title: Text(selectedPlace?.title ?? "Unknown"), message: Text(selectedPlace?.subtitle ?? "Missing place information"), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Edit")) {
+                showingEditScreen = true
+            })
+        }
+        
+        .sheet(isPresented: $showingEditScreen) {
+            if selectedPlace != nil {
+                EditView(placemark: selectedPlace!)
+            }
         }
     }
 }
