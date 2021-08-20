@@ -14,52 +14,112 @@ struct ContentView: View {
     @State private var selectedPlace: MKPointAnnotation?
     @State private var showingPlaceDetails = false
     @State private var showingEditScreen = false
+    @State private var isUnlocked = false
     
-    @State private var locations = [MKPointAnnotation]()
+    @State private var locations = [CodableMKPointAnnotation]()
     
     var body: some View {
-        ZStack {
-            MapView(centerCoordinate: $centerCoordinate, selectedPlace: $selectedPlace, showingPlaceDetails: $showingPlaceDetails, annotations: locations)
-                .edgesIgnoringSafeArea(.all)
-            Circle()
-                .fill(Color.blue)
-                .opacity(0.3)
-                .frame(width: 32, height: 32)
-            
-            VStack {
-                Spacer()
-                HStack {
+        if isUnlocked {
+            ZStack {
+                MapView(centerCoordinate: $centerCoordinate, selectedPlace: $selectedPlace, showingPlaceDetails: $showingPlaceDetails, annotations: locations)
+                    .edgesIgnoringSafeArea(.all)
+                Circle()
+                    .fill(Color.blue)
+                    .opacity(0.3)
+                    .frame(width: 32, height: 32)
+                
+                VStack {
                     Spacer()
-                    Button(action: {
-                        let newLocation = MKPointAnnotation()
-                        newLocation.coordinate = centerCoordinate
-                        newLocation.title = "Example location"
-                        locations.append(newLocation)
-                        selectedPlace = newLocation
-                        showingEditScreen = true
-                    }) {
-                        Image(systemName: "plus")
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            let newLocation = CodableMKPointAnnotation()
+                            newLocation.coordinate = centerCoordinate
+                            newLocation.title = "Example location"
+                            locations.append(newLocation)
+                            selectedPlace = newLocation
+                            showingEditScreen = true
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        .padding()
+                        .background(Color.black.opacity(0.75))
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .clipShape(Circle())
+                        .padding(.trailing)
                     }
-                    .padding()
-                    .background(Color.black.opacity(0.75))
-                    .foregroundColor(.white)
-                    .font(.title)
-                    .clipShape(Circle())
-                    .padding(.trailing)
                 }
             }
-        }
-        
-        .alert(isPresented: $showingPlaceDetails) {
-            Alert(title: Text(selectedPlace?.title ?? "Unknown"), message: Text(selectedPlace?.subtitle ?? "Missing place information"), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Edit")) {
-                showingEditScreen = true
-            })
-        }
-        
-        .sheet(isPresented: $showingEditScreen) {
-            if selectedPlace != nil {
-                EditView(placemark: selectedPlace!)
+            .onAppear(perform: loadData)
+            
+            .alert(isPresented: $showingPlaceDetails) {
+                Alert(title: Text(selectedPlace?.title ?? "Unknown"), message: Text(selectedPlace?.subtitle ?? "Missing place information"), primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Edit")) {
+                    showingEditScreen = true
+                })
             }
+            
+            .sheet(isPresented: $showingEditScreen, onDismiss: saveData) {
+                if selectedPlace != nil {
+                    EditView(placemark: selectedPlace!)
+                }
+            }
+        } else {
+            Button("Unlock Places") {
+                authenticate()
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func loadData() {
+        let filename = getDocumentsDirectory().appendingPathComponent("SavedPlaces")
+
+        do {
+            let data = try Data(contentsOf: filename)
+            locations = try JSONDecoder().decode([CodableMKPointAnnotation].self, from: data)
+        } catch {
+            print("Unable to load saved data.")
+        }
+    }
+    
+    func saveData() {
+        do {
+            let filename = getDocumentsDirectory().appendingPathComponent("SavedPlaces")
+            let data = try JSONEncoder().encode(self.locations)
+            try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
+        } catch {
+            print("Unable to save data.")
+        }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authenticate yourself to unlock your places."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+
+                DispatchQueue.main.async {
+                    if success {
+                        self.isUnlocked = true
+                    } else {
+                        // error
+                    }
+                }
+            }
+        } else {
+            // no biometrics
         }
     }
 }
