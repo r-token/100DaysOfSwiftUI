@@ -14,6 +14,8 @@
 		F4A07E5126C95B7400362987 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A07E5026C95B7400362987 /* ContentView.swift */; };
 		F4A07E5326C95B7500362987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4A07E5226C95B7500362987 /* Assets.xcassets */; };
 		F4A07E5626C95B7500362987 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4A07E5526C95B7500362987 /* Preview Assets.xcassets */; };
+		F4A7C18A26CFE551008EE250 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A7C18926CFE551008EE250 /* MainView.swift */; };
+		F4A7C18C26CFE6EA008EE250 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A7C18B26CFE6EA008EE250 /* PlusButton.swift */; };
 		F4AD827D26CBEFF7005CAAC4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD827C26CBEFF7005CAAC4 /* MapView.swift */; };
 		F4F5937226CF32D900FD0D80 /* MKPointAnnotation-Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5937126CF32D900FD0D80 /* MKPointAnnotation-Codable.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +30,8 @@
 		F4A07E5226C95B7500362987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4A07E5526C95B7500362987 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F4A07E5726C95B7500362987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A7C18926CFE551008EE250 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F4A7C18B26CFE6EA008EE250 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		F4AD827C26CBEFF7005CAAC4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F4F5937126CF32D900FD0D80 /* MKPointAnnotation-Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-Codable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +68,8 @@
 			children = (
 				F4A07E4E26C95B7400362987 /* Project14_BucketListApp.swift */,
 				F4A07E5026C95B7400362987 /* ContentView.swift */,
+				F4A7C18926CFE551008EE250 /* MainView.swift */,
+				F4A7C18B26CFE6EA008EE250 /* PlusButton.swift */,
 				F405637426CD48AB00716EAF /* Result.swift */,
 				F4AD827C26CBEFF7005CAAC4 /* MapView.swift */,
 				F405637026CD468200716EAF /* MKPointAnnotation-ObservableObject.swift */,
@@ -154,12 +160,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F5937226CF32D900FD0D80 /* MKPointAnnotation-Codable.swift in Sources */,
+				F4A7C18A26CFE551008EE250 /* MainView.swift in Sources */,
 				F405637526CD48AB00716EAF /* Result.swift in Sources */,
 				F4A07E5126C95B7400362987 /* ContentView.swift in Sources */,
 				F405637326CD46F500716EAF /* EditView.swift in Sources */,
 				F405637126CD468200716EAF /* MKPointAnnotation-ObservableObject.swift in Sources */,
 				F4AD827D26CBEFF7005CAAC4 /* MapView.swift in Sources */,
 				F4A07E4F26C95B7400362987 /* Project14_BucketListApp.swift in Sources */,
+				F4A7C18C26CFE6EA008EE250 /* PlusButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

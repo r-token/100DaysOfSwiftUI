@@ -20,37 +20,7 @@ struct ContentView: View {
     
     var body: some View {
         if isUnlocked {
-            ZStack {
-                MapView(centerCoordinate: $centerCoordinate, selectedPlace: $selectedPlace, showingPlaceDetails: $showingPlaceDetails, annotations: locations)
-                    .edgesIgnoringSafeArea(.all)
-                Circle()
-                    .fill(Color.blue)
-                    .opacity(0.3)
-                    .frame(width: 32, height: 32)
-                
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            let newLocation = CodableMKPointAnnotation()
-                            newLocation.coordinate = centerCoordinate
-                            newLocation.title = "Example location"
-                            locations.append(newLocation)
-                            selectedPlace = newLocation
-                            showingEditScreen = true
-                        }) {
-                            Image(systemName: "plus")
-                        }
-                        .padding()
-                        .background(Color.black.opacity(0.75))
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .clipShape(Circle())
-                        .padding(.trailing)
-                    }
-                }
-            }
+            MainView(centerCoordinate: $centerCoordinate, selectedPlace: $selectedPlace, showingPlaceDetails: $showingPlaceDetails, isShowingEditScreen: $showingEditScreen, locations: $locations)
             .onAppear(perform: loadData)
             
             .alert(isPresented: $showingPlaceDetails) {
@@ -114,7 +84,7 @@ struct ContentView: View {
                     if success {
                         self.isUnlocked = true
                     } else {
-                        // error
+                        // try again
                     }
                 }
             }
