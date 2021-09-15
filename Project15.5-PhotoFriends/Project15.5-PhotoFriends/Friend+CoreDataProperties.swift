@@ -2,7 +2,7 @@
 //  Friend+CoreDataProperties.swift
 //  Project15.5-PhotoFriends
 //
-//  Created by Ryan Token on 9/12/21.
+//  Created by Ryan Token on 9/14/21.
 //
 //
 
@@ -19,7 +19,9 @@ extension Friend {
     @NSManaged public var details: String?
     @NSManaged public var name: String?
     @NSManaged public var photoid: UUID?
-    
+    @NSManaged public var latitude: Double
+    @NSManaged public var longitude: Double
+
     public var wrappedDetails: String {
         details ?? "Details Unknown"
     }
@@ -31,7 +33,14 @@ extension Friend {
     public var wrappedPhotoId: UUID {
         photoid ?? UUID()
     }
-
+    
+    public var wrappedLatitude: Double {
+        latitude
+    }
+    
+    public var wrappedLongitude: Double {
+        longitude
+    }
 }
 
 extension Friend : Identifiable {

@@ -18,6 +18,10 @@
 		F416B4CC26EEAAB300AB29E1 /* ImageNamerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416B4CB26EEAAB300AB29E1 /* ImageNamerView.swift */; };
 		F416B4CE26EEB46F00AB29E1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416B4CD26EEB46F00AB29E1 /* DetailView.swift */; };
 		F44164D926EE9B650078DA83 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44164D826EE9B650078DA83 /* ImagePicker.swift */; };
+		F494589326F176FE00790F29 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F494589226F176FE00790F29 /* MapView.swift */; };
+		F494589526F1777100790F29 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F494589426F1777100790F29 /* LocationFetcher.swift */; };
+		F494589726F1781D00790F29 /* MKPointAnnotation-ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F494589626F1781D00790F29 /* MKPointAnnotation-ObservableObject.swift */; };
+		F494589926F1782D00790F29 /* MKPointAnnotation-Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F494589826F1782D00790F29 /* MKPointAnnotation-Codable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		F416B4CB26EEAAB300AB29E1 /* ImageNamerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNamerView.swift; sourceTree = "<group>"; };
 		F416B4CD26EEB46F00AB29E1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		F44164D826EE9B650078DA83 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F494589226F176FE00790F29 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F494589426F1777100790F29 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		F494589626F1781D00790F29 /* MKPointAnnotation-ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-ObservableObject.swift"; sourceTree = "<group>"; };
+		F494589826F1782D00790F29 /* MKPointAnnotation-Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-Codable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,10 @@
 				F416B4C826EEA8EF00AB29E1 /* Friend+CoreDataProperties.swift */,
 				F4103A3F26EE97D600441BFB /* Project15_5_PhotoFriendsApp.swift */,
 				F4103A4126EE97D600441BFB /* ContentView.swift */,
+				F494589226F176FE00790F29 /* MapView.swift */,
+				F494589626F1781D00790F29 /* MKPointAnnotation-ObservableObject.swift */,
+				F494589826F1782D00790F29 /* MKPointAnnotation-Codable.swift */,
+				F494589426F1777100790F29 /* LocationFetcher.swift */,
 				F416B4CD26EEB46F00AB29E1 /* DetailView.swift */,
 				F416B4CB26EEAAB300AB29E1 /* ImageNamerView.swift */,
 				F44164D826EE9B650078DA83 /* ImagePicker.swift */,
@@ -160,12 +172,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F416B4CC26EEAAB300AB29E1 /* ImageNamerView.swift in Sources */,
+				F494589926F1782D00790F29 /* MKPointAnnotation-Codable.swift in Sources */,
+				F494589726F1781D00790F29 /* MKPointAnnotation-ObservableObject.swift in Sources */,
 				F4103A4926EE97D700441BFB /* Persistence.swift in Sources */,
 				F416B4CE26EEB46F00AB29E1 /* DetailView.swift in Sources */,
 				F4103A4226EE97D600441BFB /* ContentView.swift in Sources */,
+				F494589526F1777100790F29 /* LocationFetcher.swift in Sources */,
 				F44164D926EE9B650078DA83 /* ImagePicker.swift in Sources */,
 				F4103A4C26EE97D700441BFB /* Project15_5_PhotoFriends.xcdatamodeld in Sources */,
 				F416B4CA26EEA8EF00AB29E1 /* Friend+CoreDataProperties.swift in Sources */,
+				F494589326F176FE00790F29 /* MapView.swift in Sources */,
 				F416B4C926EEA8EF00AB29E1 /* Friend+CoreDataClass.swift in Sources */,
 				F4103A4026EE97D600441BFB /* Project15_5_PhotoFriendsApp.swift in Sources */,
 			);

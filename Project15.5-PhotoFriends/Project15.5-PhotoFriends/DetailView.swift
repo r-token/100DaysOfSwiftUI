@@ -7,9 +7,26 @@
 
 import SwiftUI
 import CoreData
+import MapKit
 
 struct DetailView: View {
     var friend: Friend
+    
+    var centerCoordinate: CLLocationCoordinate2D {
+        let latitude = friend.latitude as CLLocationDegrees
+        let longitude = friend.longitude as CLLocationDegrees
+        
+        let centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        return centerCoordinate
+    }
+    
+    var annotation: MKAnnotation {
+        let newLocation = CodableMKPointAnnotation()
+        newLocation.coordinate = centerCoordinate
+        newLocation.title = "Example location"
+        
+        return newLocation
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,6 +38,8 @@ struct DetailView: View {
                 .resizable()
                 .scaledToFit()
                 .padding()
+            
+            MapView(centerCoordinate: centerCoordinate, annotation: annotation)
             
             Spacer()
         }

@@ -22,6 +22,7 @@ struct ContentView: View {
         animation: .default)
     
     private var friends: FetchedResults<Friend>
+    let locationFetcher = LocationFetcher()
 
     var body: some View {
         NavigationView {
@@ -61,6 +62,7 @@ struct ContentView: View {
     }
 
     private func addFriend() {
+        locationFetcher.start()
         isShowingImagePicker = true
     }
     
@@ -69,24 +71,37 @@ struct ContentView: View {
     }
     
     func loadImage() {
-            let newFriend = Friend(context: moc)
-            let uuid = UUID()
-            
-            newFriend.name = name
-            newFriend.details = ""
-            newFriend.photoid = uuid
+        let newFriend = Friend(context: moc)
+        let uuid = UUID()
+        
+        var latitude = 0.00
+        var longitude = 0.00
+    
+        if let location = locationFetcher.lastKnownLocation {
+            latitude = location.latitude as Double
+            longitude = location.longitude as Double
+            print("Your location is \(location)")
+        } else {
+            print("Your location is unknown")
+        }
+        
+        newFriend.name = name
+        newFriend.details = ""
+        newFriend.photoid = uuid
+        newFriend.latitude = latitude
+        newFriend.longitude = longitude
 
-            do {
-                if let jpegData = selectedImage?.jpegData(compressionQuality: 0.8) {
-                    try? jpegData.write(to: getDocumentsDirectory().appendingPathComponent(uuid.uuidString), options: [.atomicWrite, .completeFileProtection])
-                }
-                try moc.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        do {
+            if let jpegData = selectedImage?.jpegData(compressionQuality: 0.8) {
+                try? jpegData.write(to: getDocumentsDirectory().appendingPathComponent(uuid.uuidString), options: [.atomicWrite, .completeFileProtection])
             }
+            try moc.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {
