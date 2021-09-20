@@ -11,7 +11,7 @@ class Prospect: Identifiable, Codable {
     var id = UUID()
     var name = "Anonymous"
     var emailAddress = ""
-    var isContacted = false
+    fileprivate(set) var isContacted = false // this property can be read from anywhere, but only written from the current file
 }
 
 class Prospects: ObservableObject {
@@ -19,5 +19,10 @@ class Prospects: ObservableObject {
 
     init() {
         people = []
+    }
+    
+    func toggle(_ prospect: Prospect) {
+        objectWillChange.send()
+        prospect.isContacted.toggle()
     }
 }
