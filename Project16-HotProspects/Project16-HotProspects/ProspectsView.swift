@@ -12,6 +12,9 @@ import UserNotifications
 struct ProspectsView: View {
     @EnvironmentObject var prospects: Prospects
     @State private var isShowingScanner = false
+    @State private var isShowingSortSheet = false
+    @State private var sortingByName = false
+    @State private var sortingByRecency = false
     
     enum FilterType {
         case none, contacted, uncontacted
@@ -22,10 +25,40 @@ struct ProspectsView: View {
     var filteredProspects: [Prospect] {
         switch filter {
         case .none:
+            if (sortingByName) {
+                let sortedProspects = prospects.people.sorted(by: { $0.name > $1.name })
+                return sortedProspects
+            }
+            
+            if (sortingByRecency) {
+                let sortedProspects = prospects.people.sorted(by: { $0.scanDate > $1.scanDate })
+                return sortedProspects
+            }
+            
             return prospects.people
         case .contacted:
+            if (sortingByName) {
+                let sortedProspects = prospects.people.sorted(by: { $0.name > $1.name })
+                return sortedProspects
+            }
+            
+            if (sortingByRecency) {
+                let sortedProspects = prospects.people.sorted(by: { $0.scanDate > $1.scanDate })
+                return sortedProspects
+            }
+            
             return prospects.people.filter { $0.isContacted }
         case .uncontacted:
+            if (sortingByName) {
+                let sortedProspects = prospects.people.sorted(by: { $0.name > $1.name })
+                return sortedProspects
+            }
+            
+            if (sortingByRecency) {
+                let sortedProspects = prospects.people.sorted(by: { $0.scanDate > $1.scanDate })
+                return sortedProspects
+            }
+            
             return prospects.people.filter { !$0.isContacted }
         }
     }
@@ -45,39 +78,75 @@ struct ProspectsView: View {
         NavigationView {
             List {
                 ForEach(filteredProspects) { prospect in
-                    VStack(alignment: .leading) {
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
-                        
-                        .contextMenu {
-                            Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
-                                prospects.toggle(prospect)
-                            }
-                            if !prospect.isContacted {
-                                Button("Remind Me") {
-                                    self.addNotification(for: prospect)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundColor(.secondary)
+                            
+                            .contextMenu {
+                                Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
+                                    prospects.toggle(prospect)
+                                }
+                                if !prospect.isContacted {
+                                    Button("Remind Me") {
+                                        self.addNotification(for: prospect)
+                                    }
                                 }
                             }
+                        }
+                        
+                        Spacer()
+                        
+                        if prospect.isContacted {
+                            Image(systemName: "person.fill.checkmark")
+                        } else {
+                            Image(systemName: "person.fill.xmark")
                         }
                     }
                 }
             }
             
+            .actionSheet(isPresented: $isShowingSortSheet) {
+                ActionSheet(title: Text("Sort Prospects"), message: Text("Select a method of sorting"), buttons: [
+                    .default(Text("Name")) { sortByName() },
+                    .default(Text("Recency")) { sortByRecency() },
+                    .cancel()
+                ])
+            }
+            
             .navigationBarTitle(title)
             
-            .navigationBarItems(trailing: Button(action: {
-                isShowingScanner = true
-            }) {
-                Image(systemName: "qrcode.viewfinder")
-                Text("Scan")
-            })
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowingSortSheet = true
+                    }) {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                    }
+
+                    Button(action: {
+                        isShowingScanner = true
+                    }) {
+                        Image(systemName: "qrcode.viewfinder")
+                        Text("Scan")
+                    }
+                }
+            }
             
             .sheet(isPresented: $isShowingScanner) {
-                CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: handleScan)
+                CodeScannerView(codeTypes: [.qr], simulatedData: "Ryan Token\nryan@test.net", completion: handleScan)
             }
         }
+    }
+    
+    func sortByName() {
+        sortingByName = true
+    }
+    
+    func sortByRecency() {
+        sortingByRecency = true
     }
     
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
@@ -91,6 +160,7 @@ struct ProspectsView: View {
             let person = Prospect()
             person.name = details[0]
             person.emailAddress = details[1]
+            person.scanDate = Date()
 
             prospects.add(person)
         case .failure(let error):
