@@ -9,33 +9,47 @@ import SwiftUI
 import CoreHaptics
 
 struct ContentView: View {
+    @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+    
+    @State private var scale: CGFloat = 1
+    
+    @Environment(\.accessibilityReduceTransparency) var reduceTransparency
 
     var body: some View {
         VStack {
-            Text("User is Leaving the App")
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-                    print("Moving to the background!")
+            HStack {
+                if differentiateWithoutColor {
+                    Image(systemName: "checkmark.circle")
+                }
+
+                Text("Success")
+            }
+            .padding()
+            .background(differentiateWithoutColor ? Color.black : Color.green)
+            .foregroundColor(Color.white)
+            .clipShape(Capsule())
+            
+            Text("Scaling Text on Tap")
+                .scaleEffect(scale)
+                .onTapGesture {
+                    withOptionalAnimation {
+                        scale *= 1.5
+                    }
                 }
             
-            Text("User is Entering the App")
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                    print("Moving back to the foreground!")
-                }
-            
-            Text("User is Taking a Screenshot")
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)) { _ in
-                    print("User took a screenshot!")
-                }
-            
-            Text("User's Clock Changed")
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.significantTimeChangeNotification)) { _ in
-                    print("User's clock changed significantly!")
-                }
-            
-            Text("User's Keyboard is Showing 🙈")
-                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-                    print("User's keyboard is showing!'")
-                }
+            Text("Ensuring We're Cool With Transparency")
+                .padding()
+                .background(reduceTransparency ? Color.black : Color.black.opacity(0.5))
+                .foregroundColor(Color.white)
+                .clipShape(Capsule())
+        }
+    }
+    
+    func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+        if UIAccessibility.isReduceMotionEnabled {
+            return try body()
+        } else {
+            return try withAnimation(animation, body)
         }
     }
 }
