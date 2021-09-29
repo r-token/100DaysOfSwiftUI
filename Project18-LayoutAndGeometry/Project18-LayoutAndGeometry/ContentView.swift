@@ -9,40 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Live long and prosper")
-                .frame(width: 200, height: 50, alignment: .topLeading)
-            
-            HStack(alignment: .lastTextBaseline) {
-                Text("Live")
-                    .font(.caption)
-                Text("long")
-                Text("and")
+        HStack(alignment: .midAccountAndName) {
+            VStack {
+                Text("@swiftui")
+                    .alignmentGuide(.midAccountAndName) { d in d[VerticalAlignment.center] }
+                Image("SwiftUI")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 125, height: 64)
+            }
+
+            VStack {
+                Text("Full name:")
+                Text("SwiftUI")
+                    .alignmentGuide(.midAccountAndName) { d in d[VerticalAlignment.center] }
                     .font(.title)
-                Text("prosper")
-                    .font(.largeTitle)
+                
             }
-            
-            VStack(alignment: .leading) {
-                Text("Hello, world!")
-                    .alignmentGuide(.leading) { d in d[.trailing] }
-                Text("This is a longer line of text")
-            }
-            .background(Color.red)
-            .frame(width: 300, height: 200)
-            .background(Color.blue)
-            
-            VStack(alignment: .leading) {
-                ForEach(0..<10) { position in
-                    Text("Number \(position)")
-                        .alignmentGuide(.leading) { _ in CGFloat(position) * -10 }
-                }
-            }
-            .background(Color.red)
-            .frame(width: 200, height: 250)
-            .background(Color.blue)
         }
     }
+}
+
+extension VerticalAlignment {
+    enum MidAccountAndName: AlignmentID {
+        static func defaultValue(in d: ViewDimensions) -> CGFloat {
+            return d[.top]
+        }
+    }
+
+    static let midAccountAndName = VerticalAlignment(MidAccountAndName.self)
 }
 
 struct ContentView_Previews: PreviewProvider {
