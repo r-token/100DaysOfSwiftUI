@@ -12,10 +12,13 @@ struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
     
-    @State private var showingEditScreen = false
+    @State private var isShowingEditScreen = false
     @State private var cards = [Card]()
     @State private var timeRemaining = 100
     @State private var isActive = true
+    @State private var engine: CHHapticEngine?
+    @State private var isShowingSettingsScreen = false
+    @State private var recycleIncorrectAnswers = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -40,10 +43,19 @@ struct ContentView: View {
                 
                 VStack {
                     HStack {
+                        Button(action: {
+                            isShowingSettingsScreen = true
+                        }) {
+                            Image(systemName: "gear")
+                                .padding()
+                                .background(Color.black.opacity(0.7))
+                                .clipShape(Circle())
+                        }
+                        
                         Spacer()
 
                         Button(action: {
-                            showingEditScreen = true
+                            isShowingEditScreen = true
                         }) {
                             Image(systemName: "plus.circle")
                                 .padding()
@@ -58,47 +70,9 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .padding()
                 
-                if differentiateWithoutColor || accessibilityEnabled {
-                    VStack {
-                        Spacer()
-
-                        HStack {
-                            Button(action: {
-                                withAnimation {
-                                    removeCard(at: self.cards.count - 1)
-                                }
-                            }) {
-                                Image(systemName: "xmark.circle")
-                                    .padding()
-                                    .background(Color.black.opacity(0.7))
-                                    .clipShape(Circle())
-                            }
-                            .accessibility(label: Text("Wrong"))
-                            .accessibility(hint: Text("Mark your answer as being incorrect."))
-                            Spacer()
-
-                            Button(action: {
-                                withAnimation {
-                                    removeCard(at: self.cards.count - 1)
-                                }
-                            }) {
-                                Image(systemName: "checkmark.circle")
-                                    .padding()
-                                    .background(Color.black.opacity(0.7))
-                                    .clipShape(Circle())
-                            }
-                            .accessibility(label: Text("Correct"))
-                            .accessibility(hint: Text("Mark your answer as being correct."))
-                        }
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .padding()
-                    }
-                }
-                
                 ZStack {
                     ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: cards[index]) {
+                        CardView(recycleIncorrectAnswers: $recycleIncorrectAnswers, card: cards[index], cards: $cards) {
                             withAnimation {
                                 removeCard(at: index)
                             }
@@ -124,6 +98,15 @@ struct ContentView: View {
             
             if timeRemaining > 0 {
                 timeRemaining -= 1
+                
+                if timeRemaining == 1 {
+                    prepareHaptics()
+                }
+            }
+            
+            if timeRemaining == 0 {
+                timesUp()
+                resetCards()
             }
         }
         
@@ -137,8 +120,12 @@ struct ContentView: View {
             }
         }
         
-        .sheet(isPresented: $showingEditScreen, onDismiss: resetCards) {
+        .sheet(isPresented: $isShowingEditScreen, onDismiss: resetCards) {
             EditCardsView()
+        }
+        
+        .sheet(isPresented: $isShowingSettingsScreen, onDismiss: resetCards) {
+            SettingsView(recycleIncorrectAnswers: $recycleIncorrectAnswers)
         }
         
         .onAppear(perform: resetCards)
@@ -146,8 +133,9 @@ struct ContentView: View {
     
     func removeCard(at index: Int) {
         guard index >= 0 else { return }
-        cards.remove(at: index)
         
+        cards.remove(at: index)
+            
         if cards.isEmpty {
             isActive = false
         }
@@ -164,6 +152,49 @@ struct ContentView: View {
             if let decoded = try? JSONDecoder().decode([Card].self, from: data) {
                 cards = decoded
             }
+        }
+    }
+    
+    func prepareHaptics() {
+        print("Preparing Haptics!")
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
+    }
+    
+    func timesUp() {
+        print("Times up! Playing Haptics!")
+        // make sure that the device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+
+        // create our haptic feedback sequence
+        for i in stride(from: 0, to: 1, by: 0.1) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+            events.append(event)
+        }
+
+        for i in stride(from: 0, to: 1, by: 0.1) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+            events.append(event)
+        }
+
+        // convert those events into a pattern and play it immediately
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription).")
         }
     }
 }

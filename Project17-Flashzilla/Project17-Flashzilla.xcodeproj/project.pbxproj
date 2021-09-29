@@ -10,6 +10,7 @@
 		F4759A1426FE089B00E1D821 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4759A1326FE089B00E1D821 /* Card.swift */; };
 		F4759A1826FE098C00E1D821 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4759A1726FE098C00E1D821 /* CardView.swift */; };
 		F4759A1C2702001A00E1D821 /* EditCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4759A1B2702001A00E1D821 /* EditCardsView.swift */; };
+		F4759A1E27040B7F00E1D821 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4759A1D27040B7F00E1D821 /* SettingsView.swift */; };
 		F4823BF726FB6F2300CF5AFA /* Project17_FlashzillaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4823BF626FB6F2300CF5AFA /* Project17_FlashzillaApp.swift */; };
 		F4823BF926FB6F2300CF5AFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4823BF826FB6F2300CF5AFA /* ContentView.swift */; };
 		F4823BFB26FB6F2400CF5AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4823BFA26FB6F2400CF5AFA /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		F4759A1326FE089B00E1D821 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		F4759A1726FE098C00E1D821 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F4759A1B2702001A00E1D821 /* EditCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardsView.swift; sourceTree = "<group>"; };
+		F4759A1D27040B7F00E1D821 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F4823BF326FB6F2300CF5AFA /* Project17-Flashzilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project17-Flashzilla.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4823BF626FB6F2300CF5AFA /* Project17_FlashzillaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project17_FlashzillaApp.swift; sourceTree = "<group>"; };
 		F4823BF826FB6F2300CF5AFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			children = (
 				F4823BF626FB6F2300CF5AFA /* Project17_FlashzillaApp.swift */,
 				F4823BF826FB6F2300CF5AFA /* ContentView.swift */,
+				F4759A1D27040B7F00E1D821 /* SettingsView.swift */,
 				F4759A1326FE089B00E1D821 /* Card.swift */,
 				F4759A1B2702001A00E1D821 /* EditCardsView.swift */,
 				F4759A1726FE098C00E1D821 /* CardView.swift */,
@@ -149,6 +152,7 @@
 				F4823BF926FB6F2300CF5AFA /* ContentView.swift in Sources */,
 				F4759A1426FE089B00E1D821 /* Card.swift in Sources */,
 				F4759A1826FE098C00E1D821 /* CardView.swift in Sources */,
+				F4759A1E27040B7F00E1D821 /* SettingsView.swift in Sources */,
 				F4759A1C2702001A00E1D821 /* EditCardsView.swift in Sources */,
 				F4823BF726FB6F2300CF5AFA /* Project17_FlashzillaApp.swift in Sources */,
 			);

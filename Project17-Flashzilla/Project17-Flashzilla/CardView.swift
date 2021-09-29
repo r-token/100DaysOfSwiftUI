@@ -15,7 +15,10 @@ struct CardView: View {
     @State private var isShowingAnswer = false
     @State private var offset = CGSize.zero
     
+    @Binding var recycleIncorrectAnswers: Bool
+    
     let card: Card
+    @Binding var cards: [Card]
     var removal: (() -> Void)? = nil
     
     var body: some View {
@@ -73,11 +76,20 @@ struct CardView: View {
                     if abs(offset.width) > 100 {
                         if offset.width > 0 {
                             feedback.notificationOccurred(.success)
+                            removal?()
                         } else {
                             feedback.notificationOccurred(.error)
+                            
+                            if recycleIncorrectAnswers {
+                                print("recycling incorrect answer")
+                                
+                                withAnimation {
+                                    cards.insert(card, at: 0)
+                                }
+                            } else {
+                                removal?()
+                            }
                         }
-
-                        removal?()
                     } else {
                         offset = .zero
                     }
@@ -87,12 +99,5 @@ struct CardView: View {
             isShowingAnswer.toggle()
         }
         .animation(.spring(), value: offset)
-    }
-}
-
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(card: Card.example)
-            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
