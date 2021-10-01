@@ -11,6 +11,7 @@ struct MissionView: View {
     let mission: Mission
     let astronauts: [CrewMember]
     let allMissions: [Mission] = Bundle.main.decode("missions.json")
+    let frameHeight: CGFloat = 300
     
     init(mission: Mission, astronauts: [Astronaut]) {
         self.mission = mission
@@ -29,15 +30,27 @@ struct MissionView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { fullView in
             ScrollView(.vertical) {
                 VStack {
-                    Image(mission.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding()
-                    
+                    GeometryReader { geometry in
+                        HStack {
+                            Spacer()
+                            
+                            Image(mission.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: fullView.size.width * 0.7)
+                                .padding()
+                                .offset(x: 0, y: getOffsetForMissionPatch(for: geometry))
+                                .scaleEffect(getScaleOfMissionPatch(for: geometry))
+                            
+                            Spacer()
+                        }
+                        
+                    }
+                    .frame(height: frameHeight, alignment: .center)
+                        
                     HStack {
                         Text("Launch Date:")
                         Text(mission.formattedLaunchDate)
@@ -76,6 +89,30 @@ struct MissionView: View {
             }
         }
         .navigationBarTitle(Text(mission.displayName), displayMode: .inline)
+    }
+    
+    func getOffsetForMissionPatch(for geometry: GeometryProxy) -> CGFloat {
+        let scale = getScaleOfMissionPatch(for: geometry)
+        return self.frameHeight * (1 - scale) * 0.95
+    }
+
+    func getScaleOfMissionPatch(for geometry: GeometryProxy) -> CGFloat {
+        let offset = geometry.frame(in: .global).minY
+        let halfHeight = self.frameHeight / 2
+
+        // This value was found by just printing the minY of .global at the start
+        let startingOffset: CGFloat = 91
+
+        let minimumSizeAtOffset = startingOffset - halfHeight
+        let scale = 0.8 + 0.2 * (offset - minimumSizeAtOffset) / halfHeight
+
+        if scale < 0.8 {
+            return 0.8
+        } else if scale > 1.2 {
+            return 1.2
+        }
+
+        return scale
     }
 }
 
