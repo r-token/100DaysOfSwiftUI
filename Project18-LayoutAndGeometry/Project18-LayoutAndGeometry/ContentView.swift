@@ -9,36 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack(alignment: .midAccountAndName) {
-            VStack {
-                Text("@swiftui")
-                    .alignmentGuide(.midAccountAndName) { d in d[VerticalAlignment.center] }
-                Image("SwiftUI")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 125, height: 64)
-            }
-
-            VStack {
-                Text("Full name:")
-                Text("SwiftUI")
-                    .alignmentGuide(.midAccountAndName) { d in d[VerticalAlignment.center] }
-                    .font(.title)
+        VStack {
+            Text("Hi!")
+                .position(x: 100, y: 100)
+                .background(Color.red)
                 
-            }
+            
+            Text("Hi!")
+                .offset(x: 20, y: 20)
+                .background(Color.red)
+                
         }
     }
 }
 
-extension VerticalAlignment {
-    enum MidAccountAndName: AlignmentID {
-        static func defaultValue(in d: ViewDimensions) -> CGFloat {
-            return d[.top]
-        }
-    }
-
-    static let midAccountAndName = VerticalAlignment(MidAccountAndName.self)
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
