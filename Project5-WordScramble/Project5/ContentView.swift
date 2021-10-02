@@ -26,13 +26,23 @@ struct ContentView: View {
                     .padding()
                     .autocapitalization(.none)
                 
-                List(usedWords, id: \.self) { word in
-                    HStack {
-                        Image(systemName: "\(word.count).circle")
-                        Text(word)
+                GeometryReader { listGeo in
+                    List {
+                        ForEach(usedWords, id: \.self) { word in
+                            GeometryReader { itemGeo in
+                                HStack {
+                                    Image(systemName: "\(word.count).circle")
+                                        .foregroundColor(getColor(listGeo: listGeo, itemGeo: itemGeo))
+                                    Text(word)
+                                }
+                                .frame(width: itemGeo.size.width, alignment: .leading)
+                                .offset(x: getOffset(listGeo: listGeo, itemGeo: itemGeo), y: 0)
+                                
+                                .accessibilityElement(children: .ignore)
+                                .accessibility(label: Text("\(word), \(word.count) letters"))
+                            }
+                        }
                     }
-                    .accessibilityElement(children: .ignore)
-                    .accessibility(label: Text("\(word), \(word.count) letters"))
                 }
                 
                 Text("Score: \(score)")
@@ -141,6 +151,46 @@ struct ContentView: View {
         errorTitle = title
         errorMessage = message
         showingError = true
+    }
+    
+    func getOffset(listGeo: GeometryProxy, itemGeo: GeometryProxy) -> CGFloat {
+        let listHeight = listGeo.size.height
+        let listStart = listGeo.frame(in: .global).minY
+        let itemStart = itemGeo.frame(in: .global).minY
+
+        let itemPercent =  (itemStart - listStart) / listHeight * 100
+
+        let thresholdPercent: CGFloat = 60
+        let indent: CGFloat = 2
+
+        if itemPercent > thresholdPercent {
+            return (itemPercent - (thresholdPercent - 1)) * indent
+        }
+
+        return 0
+    }
+    
+    func getColor(listGeo: GeometryProxy, itemGeo: GeometryProxy) -> Color {
+        let itemPercent = getItemPercent(listGeo: listGeo, itemGeo: itemGeo)
+
+        let colorValue = Double(itemPercent / 100)
+
+        // varying from green to red going through yellow,
+        // using Color(red:green:blue:) as suggested
+        return Color(red: 2 * colorValue, green: 2 * (1 - colorValue), blue: 0)
+
+        // varying hue is easier to work with and offers more variety though
+        //return Color(hue: colorValue, saturation: 0.9, brightness: 0.9)
+    }
+    
+    func getItemPercent(listGeo: GeometryProxy, itemGeo: GeometryProxy) -> CGFloat {
+        let listHeight = listGeo.size.height
+        let listStart = listGeo.frame(in: .global).minY
+        let itemStart = itemGeo.frame(in: .global).minY
+
+        let itemPercent =  (itemStart - listStart) / listHeight * 100
+
+        return itemPercent
     }
     
 }
