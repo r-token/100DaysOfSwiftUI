@@ -15,25 +15,88 @@ struct DiceView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Roll.total, ascending: true)],
         animation: .default)
     private var rolls: FetchedResults<Roll>
+    
+    @State private var numberOfDice = 0
+    @State private var sidesOnDie = 4
+    @State private var isShowingResultAlert = false
+    @State private var total = 0
+    @State private var feedback = UINotificationFeedbackGenerator()
+    
+    let diceSidesOptions = [4, 6, 8, 10, 12, 20, 100]
 
     var body: some View {
         NavigationView {
-            Text("Hay")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            VStack {
+                Form {
+                    Picker("Number of Dice", selection: $numberOfDice) {
+                        ForEach(1..<6) { number in
+                            if number == 1 {
+                                Text("\(number) die")
+                            } else {
+                                Text("\(number) dice")
+                            }
+                        }
+                    }
+                    
+                    Picker("Dice Type", selection: $sidesOnDie) {
+                        ForEach(diceSidesOptions, id: \.self) { sideOption in
+                            Text("\(sideOption) sides")
+                        }
+                    }
+                    
+                    Section(footer:
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Text("Roll the Dice!")
+                                    .font(.system(.title))
+                                    .padding()
+                                Button(action: rollDice) {
+                                    Image(systemName: "dice.fill")
+                                        .font(.largeTitle)
+                                }
+                            }
+                            .padding(.vertical, 80)
+                            Spacer()
+                        }
+                    ) {
+                        EmptyView()
+                    }
                 }
             }
-            Text("Select an item")
+            .navigationTitle("Dice")
+            
+            .alert(isPresented: $isShowingResultAlert) {
+                Alert(title: Text("Roll Result"), message: Text("You rolled \(numberOfDice+1) \(sidesOnDie)-sided dice for a total of \(total)"), dismissButton: .default(Text("OK")) {
+                    handleAlertDismiss()
+                })
+            }
         }
     }
+    
+    private func rollDice() {
+        feedback.prepare()
+        let diceRolls = numberOfDice+1
+        print("diceRolls: \(diceRolls)")
+        
+        for _ in 1...diceRolls {
+            feedback.notificationOccurred(.success)
+            let roll = Int.random(in: 1...sidesOnDie)
+            print("roll: \(roll)")
+            total += roll
+            print("total: \(total)")
+        }
+        
+        isShowingResultAlert = true
+    }
 
-    private func addItem(_ total: Int) {
+    private func saveRoll(_ total: Int) {
         let int16Total = Int16(total)
         
         withAnimation {
             let newRoll = Roll(context: moc)
             newRoll.total = int16Total
+            newRoll.timestamp = Date()
 
             do {
                 try moc.save()
@@ -44,6 +107,11 @@ struct DiceView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+    }
+    
+    private func handleAlertDismiss() {
+        saveRoll(total)
+        total = 0
     }
 }
 

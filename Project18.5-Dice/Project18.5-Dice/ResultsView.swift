@@ -11,18 +11,43 @@ struct ResultsView: View {
     @Environment(\.managedObjectContext) private var moc
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Roll.total, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Roll.timestamp, ascending: false)],
         animation: .default)
     private var rolls: FetchedResults<Roll>
     
     var body: some View {
-        List {
-            ForEach(rolls) { roll in
-                Text("Roll Total: \(roll.total)!")
+        NavigationView {
+            List {
+                ForEach(rolls) { roll in
+                    VStack {
+                        HStack {
+                            Text("Roll Total: \(roll.wrappedTotal)")
+                                .font(.headline)
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Text("Rolled on \(roll.wrappedTimestamp, formatter: itemFormatter)")
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
+                    }
+                }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
+            
+            .navigationTitle("Roll History")
         }
     }
+    
+    private let itemFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
+        return formatter
+    }()
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

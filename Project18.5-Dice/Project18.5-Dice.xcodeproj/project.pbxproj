@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F429CA342708C8AF005CDD2A /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F429CA332708C8AF005CDD2A /* ResultsView.swift */; };
 		F429CA362708CC46005CDD2A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F429CA352708CC46005CDD2A /* MainView.swift */; };
+		F429CA392708E393005CDD2A /* Roll+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F429CA372708E393005CDD2A /* Roll+CoreDataClass.swift */; };
+		F429CA3A2708E393005CDD2A /* Roll+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F429CA382708E393005CDD2A /* Roll+CoreDataProperties.swift */; };
 		F4C54E1A2708C5EF0050E75F /* Project18_5_DiceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C54E192708C5EF0050E75F /* Project18_5_DiceApp.swift */; };
 		F4C54E1C2708C5EF0050E75F /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C54E1B2708C5EF0050E75F /* DiceView.swift */; };
 		F4C54E1E2708C5F00050E75F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C54E1D2708C5F00050E75F /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		F429CA332708C8AF005CDD2A /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		F429CA352708CC46005CDD2A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F429CA372708E393005CDD2A /* Roll+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Roll+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F429CA382708E393005CDD2A /* Roll+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Roll+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F4C54E162708C5EF0050E75F /* Project18.5-Dice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project18.5-Dice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C54E192708C5EF0050E75F /* Project18_5_DiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project18_5_DiceApp.swift; sourceTree = "<group>"; };
 		F4C54E1B2708C5EF0050E75F /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		F4C54E182708C5EF0050E75F /* Project18.5-Dice */ = {
 			isa = PBXGroup;
 			children = (
+				F429CA372708E393005CDD2A /* Roll+CoreDataClass.swift */,
+				F429CA382708E393005CDD2A /* Roll+CoreDataProperties.swift */,
 				F4C54E192708C5EF0050E75F /* Project18_5_DiceApp.swift */,
 				F4C54E1B2708C5EF0050E75F /* DiceView.swift */,
 				F429CA352708CC46005CDD2A /* MainView.swift */,
@@ -153,6 +159,8 @@
 				F429CA362708CC46005CDD2A /* MainView.swift in Sources */,
 				F4C54E262708C5F00050E75F /* Project18_5_Dice.xcdatamodeld in Sources */,
 				F4C54E1C2708C5EF0050E75F /* DiceView.swift in Sources */,
+				F429CA3A2708E393005CDD2A /* Roll+CoreDataProperties.swift in Sources */,
+				F429CA392708E393005CDD2A /* Roll+CoreDataClass.swift in Sources */,
 				F429CA342708C8AF005CDD2A /* ResultsView.swift in Sources */,
 				F4C54E1A2708C5EF0050E75F /* Project18_5_DiceApp.swift in Sources */,
 			);
