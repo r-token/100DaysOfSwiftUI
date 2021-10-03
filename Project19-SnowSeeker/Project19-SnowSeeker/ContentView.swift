@@ -40,8 +40,30 @@ struct ContentView: View {
 }
 
 struct SheetView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     var body: some View {
-        Text("A new sheet")
+        Group {
+            if sizeClass == .compact {
+                VStack {
+                    UserView()
+                }
+            } else {
+                HStack {
+                    UserView()
+                }
+            }
+        }
+    }
+}
+
+struct UserView: View {
+    var body: some View {
+        Group {
+            Text("Name: Paul")
+            Text("Country: England")
+            Text("Pets: Luna, Arya, and Toby")
+        }
     }
 }
 
