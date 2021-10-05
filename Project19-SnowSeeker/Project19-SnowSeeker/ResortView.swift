@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ResortView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @EnvironmentObject var favorites: Favorites
+    @State private var selectedFacility: String?
+    
     let resort: Resort
 
     var body: some View {
@@ -19,10 +23,16 @@ struct ResortView: View {
 
                 Group {
                     HStack {
-                        Spacer()
-                        ResortDetailsView(resort: resort)
-                        SkiDetailsView(resort: resort)
-                        Spacer()
+                        if sizeClass == .compact {
+                            Spacer()
+                            VStack { ResortDetailsView(resort: resort) }
+                            VStack { SkiDetailsView(resort: resort) }
+                            Spacer()
+                        } else {
+                            ResortDetailsView(resort: resort)
+                            Spacer().frame(height: 0)
+                            SkiDetailsView(resort: resort)
+                        }
                     }
                     .font(.headline)
                     .foregroundColor(.secondary)
@@ -34,13 +44,34 @@ struct ResortView: View {
                     Text("Facilities")
                         .font(.headline)
 
-                    Text(ListFormatter.localizedString(byJoining: resort.facilities))
-                        .padding(.vertical)
+                    HStack {
+                        ForEach(resort.facilities) { facility in
+                            Facility.icon(for: facility)
+                                .font(.title)
+                                .onTapGesture {
+                                    selectedFacility = facility
+                                }
+                        }
+                    }
+                    .padding(.vertical)
                 }
                 .padding(.horizontal)
             }
+            
+            Button(favorites.contains(resort) ? "Remove from Favorites" : "Add to Favorites") {
+                if favorites.contains(resort) {
+                    favorites.remove(resort)
+                } else {
+                    favorites.add(resort)
+                }
+            }
+            .padding()
         }
         .navigationBarTitle(Text("\(resort.name), \(resort.country)"), displayMode: .inline)
+        
+        .alert(item: $selectedFacility) { facility in
+            Facility.alert(for: facility)
+        }
     }
 }
 
