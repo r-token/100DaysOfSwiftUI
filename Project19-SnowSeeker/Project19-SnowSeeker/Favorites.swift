@@ -16,9 +16,18 @@ class Favorites: ObservableObject {
 
     init() {
         // load our saved data
-
-        // still here? Use an empty array
-        self.resorts = []
+        if let savedData = UserDefaults.standard.data(forKey: saveKey) {
+            let decoder = JSONDecoder()
+            do {
+                resorts = try decoder.decode(Set<String>.self, from: savedData)
+            } catch {
+                print("decoding failed")
+                resorts = []
+            }
+        } else {
+            print("no favorite resorts")
+            resorts = []
+        }
     }
 
     // returns true if our set contains this resort
@@ -41,6 +50,12 @@ class Favorites: ObservableObject {
     }
 
     func save() {
-        // write out our data
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(resorts)
+            UserDefaults.standard.set(data, forKey: saveKey)
+        } catch {
+            print("encoding failed")
+        }
     }
 }
